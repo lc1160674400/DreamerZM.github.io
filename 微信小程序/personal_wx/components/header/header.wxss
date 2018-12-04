@@ -1,0 +1,28 @@
+/* components/header/header.wxss */
+.header-block{
+  position: fixed;
+  top: 0rpx;
+  width: 100%;
+  background-color: black;
+  left: 0rpx;
+  display: flex
+}
+.header-block-img{
+  width:100rpx;
+  height:100rpx;
+  left:0rpx;
+  flex:1
+}
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+.userinfo-nickname {
+  color: #aaa;
+  flex: 6;
+  display: inline-block;
+  line-height:125rpx;
+
+}

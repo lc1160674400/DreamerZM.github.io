@@ -1,0 +1,10 @@
+<!--components/header/header.wxml-->
+<!-- <text>components/header/header.wxml</text> -->
+<block>
+  
+  <view  class='header-block' catchtap='handlerEvent'>
+    <image src='{{iconImg1}}' class='header-block-img userinfo-avatar' mode='cover' wx-if='{{animate}}'></image>
+    <text class='userinfo-nickname'>{{nickname}}</text>
+  </view>
+  <!-- <text>这里是头部</view> -->
+</block>
