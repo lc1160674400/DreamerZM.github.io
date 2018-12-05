@@ -1,13 +1,30 @@
 {
-  "pages":[
+  "pages": [
+    "pages/login/login",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/games/2048/2048"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "ThirdGame",
-    "navigationBarTextStyle":"#000"
+    "navigationBarTextStyle": "#000"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "imgs/Mario-Mushroom2.png",
+        "selectedIconPath": "imgs/Mario-Mushroom.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志",
+        "iconPath": "imgs/Super-Mario2.png",
+        "selectedIconPath": "imgs/Super-Mario.png"
+      }
+    ]
   }
-
 }

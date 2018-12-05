@@ -1,5 +1,6 @@
 {
   "usingComponents":{
-    "header-block":"/components/header/header"
+    "header-block":"/components/header/header",
+    "card-block":"/components/card/card"
   }
 }

@@ -2,10 +2,14 @@
 <view class="container">
   
   <view class="userinfo">
-    <button class='login-btn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{lan == "EN"?'Login Game':'登录系统'}} </button>
-    <block wx:else>
-      <header-block iconImg1='{{userInfo.avatarUrl}}' nickname='{{userInfo.nickName}}' bind:titleclick='titleclick' mode="cover" ></header-block>
-    </block>
+  
+    <header-block 
+      iconImg1='{{userInfo.avatarUrl}}' 
+      nickname='{{userInfo.nickName}}' 
+      bind:titleclick='titleclick'>
+    </header-block>
+    <card-block>
+    </card-block>
   </view>
   <!-- <view class="usermotto">
     <text class="user-motto">{{motto}}</text>

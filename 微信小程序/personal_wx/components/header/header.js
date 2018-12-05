@@ -8,11 +8,11 @@ Component({
   properties: {
     iconImg1:{
       type:String,
-      value:'/img/smile2.png'
+      value:'/imgs/smile2.png'
     },
     iconImg2: {
       type: String,
-      value: '/img/smile.png'
+      value: '/imgs/smile.png'
     },
     animate:{
       type:Boolean,

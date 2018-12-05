@@ -1,0 +1,27 @@
+/* pages/login/login.wxss */
+.login-image{
+  width: 300rpx;
+  height: 200rpx
+}
+.login-btn{
+  width:326rpx;
+height:316rpx;
+line-height:200rpx;
+text-align:center;
+font-size:50rpx;
+font-weight:700;
+border:60rpx solid #000;
+
+}
+.bigger{
+
+}
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 

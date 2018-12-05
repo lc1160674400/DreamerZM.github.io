@@ -1,0 +1,14 @@
+<!--components/card/card.wxml-->
+<block wx:for='{{options}}' wx:for-item='item'>
+  <view class='block' bindtap='toGame' data-pages='{{item.page}}'>
+    <view class='block-title'>
+      <view class='block-title-text'>{{item.title}}</view>
+      <image class='block-title-img' src='/imgs/s_more.png' style=''></image>
+    </view>
+    <view class='block-content'>
+      <image wx:if='{{item.img}}' src='{{item.img}}' style='width:100%' class='content-img'></image>
+      <view wx:else class='no-img'>暂无图片</view>
+      
+    </view>
+  </view>
+</block>

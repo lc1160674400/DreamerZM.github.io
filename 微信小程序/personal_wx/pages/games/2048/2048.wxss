@@ -1,0 +1,108 @@
+/* pages/games/2048/2048.wxss */
+.page{
+  height: 100%;
+  width: 100%;
+  background-color: #fff
+}
+.header{
+  height: 30%;
+  width:100%;
+  background-color: #D7D7D7
+}
+.header-block1{
+  height: 50%;
+  background-color:#fff
+}
+.title-text{
+display:inline-block;
+height:100%;
+width:40%;
+font-size:65rpx;
+text-align:center;
+line-height:173rpx;
+color:#776E65;
+font-weight: 600
+
+}
+.block-content{
+  height: 100%;
+  display: inline-block;
+  width: 50%;
+  float: right
+}
+.title-block1{
+  height: 140rpx;
+  width:140rpx;
+  display: inline-block;
+  border-radius: 26rpx;
+  background-color: #BBADA0;
+  margin-left:35rpx;
+  margin-top:23rpx;
+}
+.text1{
+  color:#E6E4DA;
+text-align:center;
+font-size:33rpx;
+line-height:60rpx;
+}
+.score{
+color:#FFFFFF;
+text-align:center;
+font-size:53rpx;
+line-height:62rpx;
+}
+.header-block2{
+  height: 100%;
+  background-color:#fff
+}
+.tellme{
+  display:inline-block;
+color:#776E65;
+font-size:35rpx;
+line-height:117rpx;
+text-align:center;
+width:55%;
+
+}
+.header-btn1{
+  display:inline-block;
+background-color:#8F7A66;
+height:65%;
+width:40%;
+float:right;
+border-radius:25rpx;
+color:#FFF;
+text-align:center;
+font-size:57rpx;
+line-height:107rpx;
+margin-right:36rpx;
+}
+.content{
+  background-color: #F2F2F2;
+  height: 70%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.game-container{
+  background-color:#BBADA0;
+  width:600rpx;
+  height:600rpx;
+  border-radius:18rpx;
+}
+.game-item{
+  width:21%;
+height:21%;
+justify-content:space-between;
+background-color:#CDC1B4;
+display:inline-block;
+position:relative;
+float:left;
+margin:2% 2%;
+border-radius:16rpx;
+text-align:center;
+line-height:132rpx;
+
+
+
+}

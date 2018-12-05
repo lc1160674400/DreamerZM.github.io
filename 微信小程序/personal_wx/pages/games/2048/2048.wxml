@@ -1,0 +1,34 @@
+<!--pages/games/2048/2048.wxml-->
+<view class='page'>
+  <view class='header'>
+    <view class='header-block1'>
+      <view class='title-text'>2048</view>
+      <view class='block-content'>
+        
+        <view class='title-block1'>
+          <view class='text1'>SCORE</view>
+          <view class='score'>{{score}}</view>
+        </view>
+        <view class='title-block1'>
+          <view class='text1'>BEST</view>
+          <view class='score'>{{score}}</view>
+        </view>
+      </view>
+      <view class='header-block2'>
+        <view class='tellme'>{{tellme}}</view>
+        <view class='header-btn1'>新游戏</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='content'>
+    <view class='game-container'>
+      <block wx:for='{{[0,1,2,3]}}'>
+        <block wx:for='{{[0,1,2,3]}}'>
+          <view class='game-item'>1</view>
+        </block>
+      </block>
+    </view>
+
+  </view>
+</view>

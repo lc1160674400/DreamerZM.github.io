@@ -1,0 +1,16 @@
+<!--pages/login/login.wxml-->
+<view style='height:100%;width:100%'>
+  
+  
+  <view class="container">
+    <image src='/imgs/fly.gif' class="login-image" type='aspectFit'></image>
+    <view class="userinfo">
+      <button class='login-btn'  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> {{lan == "EN"?'Login Game':'登录'}} </button>
+    </view>
+    <!-- <image src='/imgs/eye.gif' class="login-image bigger" type='aspectFit'></image> -->
+  </view>
+
+
+</view>
+
+
