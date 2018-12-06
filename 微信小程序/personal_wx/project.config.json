@@ -27,12 +27,12 @@
 			"current": -1,
 			"list": []
 		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
 		"game": {
 			"currentL": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -40,7 +40,7 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "2048游戏模式",
+					"name": "2048",
 					"pathName": "pages/games/2048/2048"
 				}
 			]
