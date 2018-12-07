@@ -9,7 +9,6 @@ function nospace(board){
     }
   }
   return true
-
 }
 
 Page({
@@ -18,8 +17,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    score:2048,
-    best:2048,
+    score:0,
+    best:0,
     tellme:'KEEP FIGHTTING！',
     lastX: 0,
     lastY: 0,
@@ -90,7 +89,15 @@ Page({
    * 手势识别
    */
   handletouchend: function (event) {
-    console.log(event)
+    // this.data.board.forEach({
+    //   function(value,index,arr){
+    //     value.forEach(
+    //       function(value,index,arr){
+            
+    //       }
+    //     )
+    //   }
+    // })
     //左右方向滑动
     var text = ''
     var tx = this.data.lastX-this.data.startX;
@@ -109,20 +116,38 @@ Page({
         text = "向下滑动"
     }
     console.log(text)
+    
     if(text==='向右滑动'){
       this.moveRight(this.data.board)
+      this.generateNumber()
+    }else if(
+      text === '向左滑动'
+    ){
+      this.moveLeft(this.data.board)
+      this.generateNumber()
+    } else if (
+      text === '向上滑动'
+    ) {
+      this.moveUp(this.data.board)
+      this.generateNumber()
+    } else if (
+      text === '向下滑动'
+    ) {
+      this.moveDown(this.data.board)
+      this.generateNumber()
     }
+    this.setData({
+      best: this.data.score > this.data.best ? this.data.score : this.data.best
+    })
     
   },
 
   //手指按下
   handletouchtart: function (event) {
-    console.log(event)
     this.data.startX = event.touches[0].pageX
     this.data.startY = event.touches[0].pageY
   },
   handletouchmove:function(event){
-    console.log(event)
     this.data.lastX = event.touches[0].pageX
     this.data.lastY = event.touches[0].pageY
   },
@@ -142,7 +167,8 @@ Page({
     //初始化分数
     this.setData({
       score:0,
-      board: board
+      board: board,
+      best: wx.getStorageSync('best') ? wx.getStorageSync('best'):0
     }) 
     //生成随机两个数
     this.generateNumber()
@@ -150,6 +176,7 @@ Page({
   },
 
   generateNumber:function(){
+    const that = this
     var board = this.data.board
     if (!nospace(this.data.board)){
       //随机生成一个位置
@@ -183,6 +210,21 @@ Page({
       this.setData({
         board : board
       })
+    }else{
+      wx.setStorageSync('best', this.data.best)
+      wx.showModal({
+        title: '游戏结束',
+        content: '无可移动方块，是否重新开始',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            that.gameInit()
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+
     }
   },
   // moveRight:function(board){
@@ -199,7 +241,7 @@ Page({
   // }
 
 moveRight:function(board){
-  console.log(board)
+  var score = 0
   for (var i=0;i<4;i++){
     var temp = 0
     var temp_list = []
@@ -211,13 +253,14 @@ moveRight:function(board){
         temp_list[index]=board[i][j]
         index--
         is_zero = false
-      } else if (board[i][j] != 0 && board[i][j] == temp_list[index+1]){
-        console.log(index, board[i][j])
-        temp_list[index + 1] += board[i][j]
-        temp_list[index] = 0
-      } else if (board[i][j] != 0 && board[i][j] != temp_list[index + 1]){
+      } else if (board[i][j] == temp_list[index + 1] && board[i][j]!=temp){
+        score += board[i][j]
+        temp_list[index+1] = board[i][j]+temp_list[index+1]
+        temp = temp_list[index + 1]
+      } else if ((board[i][j] != temp_list[index + 1] && board[i][j] != 0) || (board[i][j] == temp && temp != 0 )) {
         temp_list[index] = board[i][j]
-      } else{
+        index--
+      }else{
         temp_list[index] = 0
       }
     
@@ -225,53 +268,127 @@ moveRight:function(board){
     board[i]= temp_list
   }
   this.setData({
-    board:board
+    board:board,
+    score: this.data.score + score
   })
 },
-moveRight: function (board) {
-  board=[
-          [0,0,0,0],
-          [0,0,0,0],
-          [0,0,0,0],
-          [16,8,8,8]
-        ]
-  console.log(board)
-  for (var i = 0; i < 4; i++) {
-    var temp = 0
-    var temp_list = []
-    var is_zero = true
-    var index = 3
-    var is_plus = 0
-    for (var j = 3; j >= 0; j--) {
-      temp_list[j] = 0;
-      if (board[i][j] != 0 && is_zero) {
-        console.log(1,j)
-        temp_list[index] = board[i][j]
-        index--
-        is_zero = false
-      } else if (board[i][j] != 0 && board[i][j] == temp_list[index + 1] && is_plus != board[i][j]) {
-        console.log(2,j)
-        is_plus = board[i][j]
-        temp_list[index + 1] += board[i][j]
-        temp_list[index] = 0
-        index--
-      } else if (board[i][j] != 0 && board[i][j] == temp_list[index + 1] && is_plus == board[i][j]) {
-        console.log(3, j)
-        temp_list[index] = board[i][j]
-      } else if (board[i][j] != 0 && board[i][j] != temp_list[index + 1]) {
-        console.log(4, j, 'sasas', board[i][j])
-        temp_list[index] = board[i][j]
-      } else {
-        temp_list[index] = 0
+  moveLeft: function (board) {
+    var score = 0
+    for (var i = 0; i < 4; i++) {
+      var temp = 0
+      var temp_list = []
+      var is_zero = true
+      var index = 0
+      for (var j = 0; j <= 3; j++) {
+        temp_list[j] = 0;
+        if (board[i][j] != 0 && is_zero) {
+          temp_list[index] = board[i][j]
+          index++
+          is_zero = false
+        } else if (board[i][j] == temp_list[index - 1] && board[i][j] != temp) {
+          temp_list[index - 1] = board[i][j] + temp_list[index - 1]
+          score += board[i][j]
+          temp = temp_list[index - 1]
+        } else if ((board[i][j] != temp_list[index - 1] && board[i][j] != 0) || (board[i][j] == temp && temp != 0)) {
+          temp_list[index] = board[i][j]
+          index++
+        } else {
+          temp_list[index] = 0
+        }
+
       }
-
+      board[i] = temp_list
     }
-    board[i] = temp_list
+    this.setData({
+      board: board,
+      score: this.data.score + score
+    })
+  },
+  moveUp: function (board) {
+    var score = 0
+    for (var i = 0; i < 4; i++) {
+      var temp = 0
+      var temp_list = []
+      var is_zero = true
+      var index = 0
+      for (var j = 0; j < 4; j++) {
+        temp_list[j] = 0;
+        if (board[j][i] != 0 && is_zero) {
+          temp_list[index] = board[j][i]
+          index++
+          is_zero = false
+        } else if (board[j][i] == temp_list[index - 1] && board[j][i] != temp) {
+          temp_list[index - 1] = board[j][i] + temp_list[index - 1]
+          score += board[j][i]
+          temp = temp_list[index - 1]
+        } else if ((board[j][i] != temp_list[index - 1] && board[j][i] != 0) || (board[j][i] == temp && temp != 0)) {
+          temp_list[index] = board[j][i]
+          index++
+        } else {
+          temp_list[index] = 0
+        }
+
+      }
+      temp_list.forEach(function(value,index,arr){
+        board[index][i] = value
+      })
+      // board[i] = temp_list
+    }
+    this.setData({
+      board: board,
+      score: this.data.score + score
+    })
+  },
+  moveDown: function (board) {
+    var score = 0
+    for (var i = 0; i < 4; i++) {
+      var temp = 0
+      var temp_list = []
+      var is_zero = true
+      var index = 3
+      for (var j = 3; j >= 0; j--) {
+        temp_list[j] = 0;
+        if (board[j][i] != 0 && is_zero) {
+          temp_list[index] = board[j][i]
+          index--
+          is_zero = false
+        } else if (board[j][i] == temp_list[index + 1] && board[j][i] != temp) {
+          temp_list[index + 1] = board[j][i] + temp_list[index + 1]
+          score += board[j][i]
+          temp = temp_list[index + 1]
+        } else if ((board[j][i] != temp_list[index + 1] && board[j][i] != 0) || (board[j][i] == temp && temp != 0)) {
+          temp_list[index] = board[j][i]
+          index--
+        } else {
+          temp_list[index] = 0
+        }
+
+      }
+      temp_list.forEach(function (value, index, arr) {
+        board[index][i] = value
+      })
+    }
+    this.setData({
+      board: board,
+      score: this.data.score + score
+    })
+  },
+/**
+ * 重新开始游戏
+ */
+  newgame:function(){
+    const that = this
+    wx.showModal({
+      title: '新游戏',
+      content: '重新开始游戏？',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.gameInit()
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   }
-  this.setData({
-    board: board
-  })
-}
-
-
 })

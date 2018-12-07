@@ -1,5 +1,5 @@
 <!--pages/games/2048/2048.wxml-->
-<view class='page' bindtouchend="handletouchend" bindtouchstart = "handletouchtart" bindtouchmove='handletouchmove'>
+<view class='page' >
   <view class='header'>
     <view class='header-block1'>
       <view class='title-text'>2048</view>
@@ -16,11 +16,11 @@
       </view>
       <view class='header-block2'>
         <view class='tellme'>{{tellme}}</view>
-        <view class='header-btn1'>新游戏</view>
+        <view class='header-btn1' bindtap='newgame'>新游戏</view>
       </view>
     </view>
   </view>
-  <view class='content'>
+  <view class='content' bindtouchend="handletouchend" bindtouchstart = "handletouchtart" bindtouchmove='handletouchmove'>
     <view class='game-container'>
       <block wx:for='{{[0,1,2,3]}}' wx:for-index='index_i'>
         <block wx:for='{{[0,1,2,3]}}' wx:for-index='index_j'>
