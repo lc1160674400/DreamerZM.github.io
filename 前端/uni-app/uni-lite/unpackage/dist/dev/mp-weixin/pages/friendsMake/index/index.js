@@ -12,333 +12,6 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/
 
 /***/ }),
 
-/***/ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js":
-/*!************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const _toString = Object.prototype.toString;
-const hasOwnProperty = Object.prototype.hasOwnProperty;
-
-function isFn (fn) {
-  return typeof fn === 'function'
-}
-
-function isStr (str) {
-  return typeof str === 'string'
-}
-
-function isPlainObject (obj) {
-  return _toString.call(obj) === '[object Object]'
-}
-
-function hasOwn (obj, key) {
-  return hasOwnProperty.call(obj, key)
-}
-
-const SYNC_API_RE = /hideKeyboard|upx2px|canIUse|^create|Sync$|Manager$/;
-
-const CONTEXT_API_RE = /^create|Manager$/;
-
-const CALLBACK_API_RE = /^on/;
-
-function isContextApi (name) {
-  return CONTEXT_API_RE.test(name)
-}
-function isSyncApi (name) {
-  return SYNC_API_RE.test(name)
-}
-
-function isCallbackApi (name) {
-  return CALLBACK_API_RE.test(name)
-}
-
-function handlePromise (promise) {
-  return promise.then(data => {
-    return [null, data]
-  })
-    .catch(err => [err])
-}
-
-function shouldPromise (name) {
-  if (isSyncApi(name)) {
-    return false
-  }
-  if (isCallbackApi(name)) {
-    return false
-  }
-  return true
-}
-
-function promisify (name, api) {
-  if (!shouldPromise(name)) {
-    return api
-  }
-  return function promiseApi (options = {}, ...params) {
-    if (isFn(options.success) || isFn(options.fail) || isFn(options.complete)) {
-      return api(options, ...params)
-    }
-    return handlePromise(new Promise((resolve, reject) => {
-      api(Object.assign({}, options, {
-        success: resolve,
-        fail: reject
-      }), ...params);
-      /* eslint-disable no-extend-native */
-      Promise.prototype.finally = function (callback) {
-        const promise = this.constructor;
-        return this.then(
-          value => promise.resolve(callback()).then(() => value),
-          reason => promise.resolve(callback()).then(() => {
-            throw reason
-          })
-        )
-      };
-    }))
-  }
-}
-
-const EPS = 1e-4;
-const BASE_DEVICE_WIDTH = 750;
-let isIOS = false;
-let deviceWidth = 0;
-let deviceDPR = 0;
-
-function checkDeviceWidth () {
-  const {
-    platform,
-    pixelRatio,
-    windowWidth
-  } = wx.getSystemInfoSync(); // uni=>wx runtime 编译目标是 uni 对象，内部不允许直接使用 uni
-
-  deviceWidth = windowWidth;
-  deviceDPR = pixelRatio;
-  isIOS = platform === 'ios';
-}
-
-function upx2px (number, newDeviceWidth) {
-  if (deviceWidth === 0) {
-    checkDeviceWidth();
-  }
-
-  number = Number(number);
-  if (number === 0) {
-    return 0
-  }
-  let result = (number / BASE_DEVICE_WIDTH) * (newDeviceWidth || deviceWidth);
-  if (result < 0) {
-    result = -result;
-  }
-  result = Math.floor(result + EPS);
-  if (result === 0) {
-    if (deviceDPR === 1 || !isIOS) {
-      return 1
-    } else {
-      return 0.5
-    }
-  }
-  return number < 0 ? -result : result
-}
-
-var protocols = {};
-
-const CALLBACKS = ['success', 'fail', 'cancel', 'complete'];
-
-function processCallback (methodName, method, returnValue) {
-  return function (res) {
-    return method(processReturnValue(methodName, res, returnValue))
-  }
-}
-
-function processArgs (methodName, fromArgs, argsOption = {}, returnValue = {}, keepFromArgs = false) {
-  if (isPlainObject(fromArgs)) { // 一般 api 的参数解析
-    const toArgs = keepFromArgs === true ? fromArgs : {}; // returnValue 为 false 时，说明是格式化返回值，直接在返回值对象上修改赋值
-    if (isFn(argsOption)) {
-      argsOption = argsOption(fromArgs, toArgs) || {};
-    }
-    for (let key in fromArgs) {
-      if (hasOwn(argsOption, key)) {
-        let keyOption = argsOption[key];
-        if (isFn(keyOption)) {
-          keyOption = keyOption(fromArgs[key], fromArgs, toArgs);
-        }
-        if (!keyOption) { // 不支持的参数
-          console.warn(`微信小程序 ${methodName}暂不支持${key}`);
-        } else if (isStr(keyOption)) { // 重写参数 key
-          toArgs[keyOption] = fromArgs[key];
-        } else if (isPlainObject(keyOption)) { // {name:newName,value:value}可重新指定参数 key:value
-          toArgs[keyOption.name ? keyOption.name : key] = keyOption.value;
-        }
-      } else if (CALLBACKS.includes(key)) {
-        toArgs[key] = processCallback(methodName, fromArgs[key], returnValue);
-      } else {
-        if (!keepFromArgs) {
-          toArgs[key] = fromArgs[key];
-        }
-      }
-    }
-    return toArgs
-  } else if (isFn(fromArgs)) {
-    fromArgs = processCallback(methodName, fromArgs, returnValue);
-  }
-  return fromArgs
-}
-
-function processReturnValue (methodName, res, returnValue, keepReturnValue = false) {
-  if (isFn(protocols.returnValue)) { // 处理通用 returnValue
-    res = protocols.returnValue(methodName, res);
-  }
-  return processArgs(methodName, res, returnValue, {}, keepReturnValue)
-}
-
-function wrapper (methodName, method) {
-  if (hasOwn(protocols, methodName)) {
-    const protocol = protocols[methodName];
-    if (!protocol) { // 暂不支持的 api
-      return function () {
-        console.error(`微信小程序 暂不支持${methodName}`);
-      }
-    }
-    return function (arg1, arg2) { // 目前 api 最多两个参数
-      let options = protocol;
-      if (isFn(protocol)) {
-        options = protocol(arg1);
-      }
-
-      arg1 = processArgs(methodName, arg1, options.args, options.returnValue);
-
-      const returnValue = wx[options.name || methodName](arg1, arg2);
-      if (isSyncApi(methodName)) { // 同步 api
-        return processReturnValue(methodName, returnValue, options.returnValue, isContextApi(methodName))
-      }
-      return returnValue
-    }
-  }
-  return method
-}
-
-const todoApis = Object.create(null);
-
-const TODOS = [
-  'subscribePush',
-  'unsubscribePush',
-  'onPush',
-  'offPush',
-  'share'
-];
-
-function createTodoApi (name) {
-  return function todoApi ({
-    fail,
-    complete
-  }) {
-    const res = {
-      errMsg: `${name}:fail:暂不支持 ${name} 方法`
-    };
-    isFn(fail) && fail(res);
-    isFn(complete) && complete(res);
-  }
-}
-
-TODOS.forEach(function (name) {
-  todoApis[name] = createTodoApi(name);
-});
-
-var providers = {
-  oauth: ['weixin'],
-  share: ['weixin'],
-  payment: ['wxpay'],
-  push: ['weixin']
-};
-
-function getProvider ({
-  service,
-  success,
-  fail,
-  complete
-}) {
-  let res = false;
-  if (providers[service]) {
-    res = {
-      errMsg: 'getProvider:ok',
-      service,
-      provider: providers[service]
-    };
-    isFn(success) && success(res);
-  } else {
-    res = {
-      errMsg: 'getProvider:fail:服务[' + service + ']不存在'
-    };
-    isFn(fail) && fail(res);
-  }
-  isFn(complete) && complete(res);
-}
-
-var extraApi = /*#__PURE__*/Object.freeze({
-  getProvider: getProvider
-});
-
-
-
-var api = /*#__PURE__*/Object.freeze({
-
-});
-
-let uni = {};
-
-if (typeof Proxy !== 'undefined') {
-  uni = new Proxy({}, {
-    get (target, name) {
-      if (name === 'upx2px') {
-        return upx2px
-      }
-      if (api[name]) {
-        return promisify(name, api[name])
-      }
-      if (extraApi[name]) {
-        return promisify(name, extraApi[name])
-      }
-      if (todoApis[name]) {
-        return promisify(name, todoApis[name])
-      }
-      if (!hasOwn(wx, name) && !hasOwn(protocols, name)) {
-        return
-      }
-      return promisify(name, wrapper(name, wx[name]))
-    }
-  });
-} else {
-  uni.upx2px = upx2px;
-
-  Object.keys(todoApis).forEach(name => {
-    uni[name] = promisify(name, todoApis[name]);
-  });
-
-  Object.keys(extraApi).forEach(name => {
-    uni[name] = promisify(name, todoApis[name]);
-  });
-
-  Object.keys(api).forEach(name => {
-    uni[name] = promisify(name, api[name]);
-  });
-
-  Object.keys(wx).forEach(name => {
-    if (hasOwn(wx, name) || hasOwn(protocols, name)) {
-      uni[name] = promisify(name, wrapper(name, wx[name]));
-    }
-  });
-}
-
-var uni$1 = uni;
-
-/* harmony default export */ __webpack_exports__["default"] = (uni$1);
-
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader/index.js?!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib/index.js?!E:\\workspace\\DreamerZM.github.io\\前端\\uni-app\\uni-lite\\components\\uni-drawer.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--18-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/vue-loader/lib??vue-loader-options!E:/workspace/DreamerZM.github.io/前端/uni-app/uni-lite/components/uni-drawer.vue?vue&type=script&lang=js& ***!
@@ -508,13 +181,47 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _uniDrawer = _interopRequireDefault(__webpack_require__(/*! ../../../components/uni-drawer.vue */ "E:\\workspace\\DreamerZM.github.io\\前端\\uni-app\\uni-lite\\components\\uni-drawer.vue"));
-var _uniIcon = _interopRequireDefault(__webpack_require__(/*! ../../../components/uni-icon.vue */ "E:\\workspace\\DreamerZM.github.io\\前端\\uni-app\\uni-lite\\components\\uni-icon.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+var _uniIcon = _interopRequireDefault(__webpack_require__(/*! ../../../components/uni-icon.vue */ "E:\\workspace\\DreamerZM.github.io\\前端\\uni-app\\uni-lite\\components\\uni-icon.vue"));
+var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
 {
   components: {
     uniDrawer: _uniDrawer.default,
     uniIcon: _uniIcon.default },
 
+  computed: (0, _vuex.mapState)(['forcedLogin', 'hasLogin', 'userName']),
   data: function data() {
     return {
       scrollLeft: 0,
@@ -528,15 +235,105 @@ var _uniIcon = _interopRequireDefault(__webpack_require__(/*! ../../../component
         name: '女孩信息',
         id: 'famale' }],
 
-      rightDrawerVisible: false };
+      rightDrawerVisible: false,
+      maleList: [
+      {
+        headImg: '../../../static/img/person/person.png',
+        name: '张三',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '../../../static/img/person/person2.png',
+        name: '李四',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '../../../static/img/person/person3.png',
+        name: '王五',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '',
+        name: '赵六',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headimg: '',
+        name: '狗蛋',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' }],
+
+
+      famaleList: [
+      {
+        headImg: '../../../static/img/person/famale1.png',
+        name: '王祖贤',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '../../../static/img/person/famale2.png',
+        name: '刘亦菲',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '../../../static/img/person/famale3.png',
+        name: '范冰冰',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headImg: '../../../static/img/person/famale4.png',
+        name: '杨超越',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' },
+
+      {
+        headimg: '../../../static/img/person/famale5.png',
+        name: '安妮海瑟薇',
+        timestamp: '2018-01-30 15:30',
+        userid: '000001' }] };
+
+
+
 
   },
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
+
+    if (!this.hasLogin) {
+      uni.showModal({
+        title: '未登录',
+        content: '您未登录，需要登录后才能继续',
+        /**
+                                    * 如果需要强制登录，不显示取消按钮
+                                    */
+        showCancel: !this.forcedLogin,
+        success: function success(res) {
+          if (res.confirm) {
+            /**
+                             * 如果需要强制登录，使用reLaunch方式
+                             */
+            if (_this.forcedLogin) {
+              uni.reLaunch({
+                url: '../../login/login' });
+
+            } else {
+              uni.navigateTo({
+                url: '../../login/login' });
+
+            }
+          }
+        } });
+
+    }
 
   },
   methods: {
-
-
     changeTab: function () {var _changeTab = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(e) {var index, tabBar, tabBarScrollLeft, width, i, result, winWidth, nowElement, nowWidth;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 index = e.detail.current;if (!
                 this.isClickChange) {_context.next = 5;break;}
@@ -582,8 +379,9 @@ var _uniIcon = _interopRequireDefault(__webpack_require__(/*! ../../../component
                 tabBarScrollLeft = tabBar.scrollLeft; //点击的时候记录并设置scrollLeft
                 this.scrollLeft = tabBarScrollLeft;
                 this.isClickChange = true;
-                this.tabIndex = index;case 11:case "end":return _context2.stop();}}}, _callee2, this);}));function tapTab(_x2) {return _tapTab.apply(this, arguments);}return tapTab;}(),
+                this.tabIndex = index;case 11:
 
+                console.log(this.tabIndex);case 12:case "end":return _context2.stop();}}}, _callee2, this);}));function tapTab(_x2) {return _tapTab.apply(this, arguments);}return tapTab;}(),
 
     closeRightDrawer: function closeRightDrawer() {
       this.rightDrawerVisible = false;
@@ -1606,7 +1404,7 @@ var render = function() {
         },
         [
           _c("view", { staticStyle: { padding: "30rpx" } }, [
-            _c("view", { staticClass: "uni-title" }, [_vm._v("抽屉式导航")]),
+            _c("view", { staticClass: "uni-title" }, [_vm._v("右侧滑出页面")]),
             _c("view", { staticClass: "uni-helllo-text" }, [
               _vm._v(
                 "这是抽屉式导航组件使用示例，你可以在这里放置任何内容。关闭抽屉式导航有多种方式："
@@ -1674,12 +1472,80 @@ var render = function() {
             ])
           ])
         ]
-      )
+      ),
+      _vm.hasLogin
+        ? _c(
+            "view",
+            { staticClass: "hello" },
+            _vm._l(_vm.tabIndex == 0 ? _vm.maleList : _vm.famaleList, function(
+              item,
+              index
+            ) {
+              return _c("view", { staticClass: "uni-card" }, [
+                _c("view", { staticClass: "uni-card-header uni-card-media" }, [
+                  _c("image", {
+                    staticClass: "uni-card-media-logo",
+                    attrs: {
+                      src: item.headImg
+                        ? item.headImg
+                        : "../../../static/img/person/person_default.png"
+                    }
+                  }),
+                  _c("view", { staticClass: "uni-card-media-body" }, [
+                    _c("text", { staticClass: "uni-card-media-text-top" }, [
+                      _vm._v(_vm._s(item.name))
+                    ]),
+                    _c("text", { staticClass: "uni-card-media-text-bottom" }, [
+                      _vm._v("发表于 " + _vm._s(item.timestamp))
+                    ])
+                  ])
+                ]),
+                _c("view", { staticClass: "uni-card-content image-view" }, [
+                  _c("image", {
+                    staticClass: "image",
+                    attrs: {
+                      src: item.headImg
+                        ? item.headImg
+                        : "../../../static/img/person/content_default.png"
+                    }
+                  })
+                ]),
+                _vm._m(0, true)
+              ])
+            })
+          )
+        : _vm._e(),
+      !_vm.hasLogin
+        ? _c("view", { staticClass: "hello" }, [
+            _c("view", { staticClass: "title" }, [_vm._v("您好 游客。")]),
+            _vm._m(1)
+          ])
+        : _vm._e()
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "uni-card-footer" }, [
+      _c("view", { staticClass: "uni-card-link" }, [_vm._v("收藏")]),
+      _c("view", { staticClass: "uni-card-link" }, [_vm._v("获取联系")]),
+      _c("view", { staticClass: "uni-card-link" }, [_vm._v("更多信息")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("view", { staticClass: "ul" }, [
+      _c("view", [_vm._v("这是 uni-app 带登录模板的示例App首页。")]),
+      _c("view", [_vm._v("在 “我的” 中点击 “登录” 可以 “登录您的账户”")])
+    ])
+  }
+]
 render._withStripped = true
 
 

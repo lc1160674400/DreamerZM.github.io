@@ -8,19 +8,44 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
 
 
 {
-  data: function data() {
-    return {};
+  computed: _objectSpread({},
+  (0, _vuex.mapState)(['hasLogin', 'forcedLogin'])),
 
+  methods: _objectSpread({},
+  (0, _vuex.mapMutations)(['logout']), {
+    bindLogin: function bindLogin() {
+      uni.navigateTo({
+        url: '../../login/login' });
 
-  } };exports.default = _default;
+    },
+    bindLogout: function bindLogout() {
+      this.logout();
+      /**
+                      * 如果需要强制登录跳转回登录页面
+                      */
+      if (this.forcedLogin) {
+        uni.reLaunch({
+          url: '../../login/login' });
+
+      }
+    } }) };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),
 
@@ -39,7 +64,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("view")
+  return _c("view", { staticClass: "content" }, [
+    _c(
+      "view",
+      { staticClass: "btn-row" },
+      [
+        !_vm.hasLogin
+          ? _c(
+              "button",
+              {
+                staticClass: "primary",
+                attrs: { type: "primary", eventid: "0fb9d8c6-0" },
+                on: { tap: _vm.bindLogin }
+              },
+              [_vm._v("登录")]
+            )
+          : _vm._e(),
+        _vm.hasLogin
+          ? _c(
+              "button",
+              {
+                attrs: { type: "default", eventid: "0fb9d8c6-1" },
+                on: { tap: _vm.bindLogout }
+              },
+              [_vm._v("退出登录")]
+            )
+          : _vm._e()
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
