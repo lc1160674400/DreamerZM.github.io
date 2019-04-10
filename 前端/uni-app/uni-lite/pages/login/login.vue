@@ -20,7 +20,8 @@
         </view> -->
         <view class="oauth-row" v-if="hasProvider" v-bind:style="{top: positionTop + 'px'}">
             <view class="oauth-image" v-for="provider in providerList" :key="provider.value">
-                <image :src="provider.image" @tap="oauth(provider.value)"></image>
+                <!-- <image :src="provider.image" @tap="oauth(provider.value)" ></image> -->
+				<button class="btn-login"  open-type="getUserInfo"  bindgetuserinfo="getUserInfoFun" v-bind:style="{background:'#fff url('+provider.image+') no-repeat center'}"></button>
             </view>
         </view>
     </view>
@@ -50,6 +51,52 @@
         computed: mapState(['forcedLogin']),
         methods: {
             ...mapMutations(['login']),
+			getUserInfoFun: function (){
+				var S = this;
+				wx.getUserInfo({
+					success: function (res){
+						console.log("userInfo:"+res)
+			　　　　　　　//do anything
+					},
+					fail: S.showPrePage
+				  })
+			  },
+			bindgetuserinfo: function (e) {
+				debugger
+				var that = this;
+				console.log(e)
+				if (e.detail.userInfo) {
+				  // 发送 res.code 到后台换取 openId, sessionKey, unionId
+				  wx.login({
+					success: res => {
+					  console.log(res.code, e.detail.iv,e.detail.encryptedData)
+					  wx.request({
+						//后台接口地址
+						url: '',
+						data: {
+						  code:res.code,
+						  iv:e.detail.iv,
+						  encryptedData:e.detail.encryptedData,
+						},
+						method: 'GET',
+						header: {
+						  'content-type': 'application/json'
+						},
+						success: function (res) {
+						  console.log('请求成功')
+						}
+					  })
+					}
+				  })  
+				} else {
+				  console.log(333,'执行到这里，说明拒绝了授权')
+				  wx.showToast({
+					title: "为了您更好的体验,请先同意授权",
+					icon: 'none',
+					duration: 2000
+				  });
+				}
+			  },
             initProvider() {
                 const filters = ['weixin', 'qq', 'sinaweibo'];
                 uni.getProvider({
@@ -123,18 +170,25 @@
 				
             },
             oauth(value) {
+				
                 uni.login({
                     provider: value,
                     success: (res) => {
+						console.log(res);
                         uni.getUserInfo({
                             provider: value,
                             success: (infoRes) => {
+								
+								
                                 /**
                                  * 实际开发中，获取用户信息后，需要将信息上报至服务端。
                                  * 服务端可以用 userInfo.openId 作为用户的唯一标识新增或绑定用户信息。
                                  */
                                 this.toMain(infoRes.userInfo.nickName);
-                            }
+                            },
+							fail:(err)=>{
+								console.log(err)
+							}
                         });
                     },
                     fail: (err) => {
@@ -188,17 +242,25 @@
     }
 
     .oauth-image {
-        width: 100upx;
-        height: 100upx;
+        /* width: 100upx;
+        height: 100upx; */
         border: 1upx solid #dddddd;
         border-radius: 100upx;
         margin: 0 40upx;
         background-color: #ffffff;
     }
-
+/* 
     .oauth-image image {
         width: 60upx;
         height: 60upx;
         margin: 20upx;
-    }
+    } */
+	.oauth-image button{
+		width:120upx;
+		height:120upx;
+		border-radius: 50%;
+		/* margin: 20upx; */
+	}
+	
+	
 </style>
