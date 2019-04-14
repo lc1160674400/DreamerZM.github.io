@@ -29,5 +29,6 @@
         "selectedIconPath": "static/mine_active.png"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

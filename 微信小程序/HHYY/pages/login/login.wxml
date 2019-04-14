@@ -1,0 +1,19 @@
+<view class="flex-container">
+  <view class="unit">
+    <view class="heart">
+      <view class="heart-piece-0"></view>
+      <view class="heart-piece-1"></view>
+      <view class="heart-piece-2"></view>
+      <view class="heart-piece-3"></view>
+      <view class="heart-piece-4"></view>
+      <view class="heart-piece-5"></view>
+      <view class="heart-piece-6"></view>
+      <view class="heart-piece-7"></view>
+      <view class="heart-piece-8"></view>
+    </view>
+    <p>equal love</p>
+  </view>
+</view>
+<view>
+  <button class='login-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">花好月圆</button>
+</view>

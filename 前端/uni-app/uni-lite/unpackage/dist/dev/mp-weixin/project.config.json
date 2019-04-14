@@ -11,6 +11,8 @@
 	"libVersion": "",
 	"appid": "wx7551e47e06e53050",
 	"projectname": "穆斯林之家",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
