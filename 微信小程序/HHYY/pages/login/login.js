@@ -54,7 +54,7 @@ Page({
         content: '请您重新点击按钮，并在弹框中点击同意按钮便于为您提供更好的服务',
       })
     }else{
-      app.globalData.userInfo = e.detail.userInfo
+      // app.globalData.userInfo = e.detail.userInfo
       // this.setData({
       //   userInfo: e.detail.userInfo,
       //   hasUserInfo: true
