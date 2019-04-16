@@ -5,6 +5,48 @@ Page({
    * 页面的初始数据
    */
   data: {
+    personList:[],
+    options: [{
+      text: '年龄',
+      type: 'sort',
+    },
+    {
+      text: '风格',
+      type: 'radio',
+      options: [{
+        text: '全部',
+      }
+      ],
+    },
+    {
+      text: '类型',
+      type: 'checkbox',
+      options: [{
+        text: '帅气',
+      },
+      {
+        text: '年轻',
+      },
+      {
+        text: '有车',
+      },
+      {
+        text: '有车',
+      },
+      {
+        text: '其他',
+      },
+      ],
+    },
+    {
+      text: '筛选',
+      type: 'filter',
+      slotName: 'filter',
+    },
+    ],
+    radioOptions: ["全部", "有车", "有房", "其他"],
+    checkboxOptions: ["在京", "国外", "其他"],
+    activeTab:0,
     tabs: [
       {
         text: '男生',
@@ -19,13 +61,15 @@ Page({
         iconColor: '#ef473a',
       }
     ],
+    isCertification:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.checkNewVersion();
+    this.getPersonList();
   },
 
   /**
@@ -76,17 +120,132 @@ Page({
   onShareAppMessage: function () {
 
   },
-  handleChange(e) {
-    const index = e.detail.index;
+  getPersonList(){
+    let personlist = []
+    var f_setDefaultImg = function(list,defaultImg){
+      var result = []
+      list.forEach(ele=>{
+        if(ele.imgUrl){
+          result.push(ele)
+        }else{
+          ele.imgUrl = defaultImg
+          result.push(ele)
+        }
+      })
+      return result
+    }
+    if(this.data.activeTab == 0){
+      personlist = [{
+        imgUrl: '../../../static/imgs/person/person.png',
+        name: '李特',
+        desc: '一个耿直的努力boy',
+      },
+        {
+          imgUrl: '../../../static/imgs/person/person2.png',
+          name: '李荣浩',
+          desc: '我就是眼睛小你能拿我怎么样',
+        },
+        {
+          imgUrl: '../../../static/imgs/person/person3.png',
+          name: '薛之谦',
+          desc: '我只会唱低音嘿嘿嘿情歌小王子',
+        },
+        {
+          imgUrl: '',
+          name: '毛不易',
+          desc: '我念你清幽为不知道回复',
+        }]
+      f_setDefaultImg(personlist,'../../../static/imgs/default_male.png')
+    }else if(this.data.activeTab == 1){
+      personlist = [{
+        imgUrl: '../../../static/imgs/person/famale1.png',
+        name: '黛安乃',
+        desc: '一个耿直的努力boy',
+      },
+      {
+        imgUrl: '../../../static/imgs/person/famale2.png',
+        name: '小萝莉',
+        desc: '我就是眼睛小你能拿我怎么样',
+      },
+      {
+        imgUrl: '../../../static/imgs/person/famale3.png',
+        name: '御姐',
+        desc: '我只会唱低音嘿嘿嘿情歌小王子',
+      },
+      {
+        imgUrl: '../../../static/imgs/person/famale3.png',
+        name: '小胖子',
+        desc: '我只会唱低音嘿嘿嘿情歌小王子',
+      },
+      {
+        imgUrl: '../../../static/imgs/person/famale4.png',
+        name: '小可爱',
+        desc: '我只会唱低音嘿嘿嘿情歌小王子',
+      },
+      {
+        imgUrl: '../../../static/imgs/person/famale5.png',
+        name: '可爱多',
+        desc: '我只会唱低音嘿嘿嘿情歌小王子',
+      },
+      {
+        imgUrl: '',
+        name: '我最可爱',
+        desc: '我念你清幽为不知道回复',
+      }]
+      f_setDefaultImg(personlist, '../../../static/imgs/default_female.png')
+    }
+    
+    this.setData({
+      personList:personlist
+    })
+  },
+  handleChangePanel(e) {
     console.log(e);
   },
-  handleSelected() {
-    this.setData({
-      index: 2,
-    });
+  handleChangeTab(e) {
+    //获取当前激活tab属性
+    if(this.data.activeTab !=  e.detail.value){
+      this.setData({
+        activeTab:e.detail.value
+      })
+      this.getPersonList()
+    }
   },
-  handleClick(e) {
-    const { index, title } = e.detail;
-    console.log('点击了tab:' + index, title);
-  },
+  
+  checkNewVersion: function () { // 检查版本更新
+    // 获取小程序更新机制兼容
+    if (wx.canIUse("getUpdateManager")) {
+      const updateManager = wx.getUpdateManager();
+      updateManager.onCheckForUpdate(function (res) {
+        // 请求完新版本信息的回调
+        if (res.hasUpdate) {
+          updateManager.onUpdateReady(function () {
+            wx.showModal({
+              title: "更新提示",
+              content: "新版本已经准备好，是否重启应用？",
+              success: function (res) {
+                if (res.confirm) {
+                  // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                  updateManager.applyUpdate();
+                }
+              }
+            });
+          });
+          updateManager.onUpdateFailed(function () {
+            // 新的版本下载失败
+            wx.showModal({
+              title: "已经有新版本了哟~",
+              content: "新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~"
+            });
+          });
+        }
+      });
+    } else {
+      // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+      wx.showModal({
+        title: "提示",
+        content: "当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。"
+      });
+    }
+  }
 })

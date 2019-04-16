@@ -1,5 +1,12 @@
 {
  "usingComponents": {
-    "w-tabs": "wuss-weapp/w-tabs/index"
+    "w-tabs": "wuss-weapp/w-tabs/index",
+    "w-drop-menu": "wuss-weapp/w-drop-menu/index",
+    "w-cell-group": "wuss-weapp/w-cell-group/index",
+    "w-radio": "wuss-weapp/w-radio/index",
+    "w-checkbox": "wuss-weapp/w-checkbox/index",
+    "w-cell": "wuss-weapp/w-cell/index",
+    "w-switch": "wuss-weapp/w-switch/index",
+    "w-button": "wuss-weapp/w-button/index"
   }
 }

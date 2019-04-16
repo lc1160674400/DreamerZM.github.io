@@ -2,5 +2,66 @@
  textStyles="font-size: 14px;"
  options="{{ tabs }}"
  activeColor="#ef473a"
- bind:onClick="handleChange"
+ bind:onChange="handleChangeTab"
 />
+
+<!-- 已经认证身份的用户 -->
+<view wx:if="{{isCertification}}">
+  <!-- 下拉选择菜单 -->
+    <w-drop-menu options="{{  options  }}" bind:onChange="handleChangePanel">
+      <w-cell-group slot="filter">
+        <w-radio color="#fc9d9a" options="{{  radioOptions  }}" />
+        <w-checkbox color="#fc9d9a" icon-type="box" options="{{ checkboxOptions }}" />
+        <w-cell label="我已阅读条款">
+          <w-switch color="#fc9d9a" slot="content" />
+        </w-cell>
+        <w-button
+        flat
+        full
+        type="warn"
+        >确定
+        </w-button>
+      </w-cell-group>
+    </w-drop-menu> 
+    <!-- 列表菜单 -->
+  <w-cell
+    isLink
+    highlight
+    desc="{{item.desc}}"
+    wuss-class-hd="w-cell-hd"
+    wuss-class-left="w-cell-left"
+    wx:for="{{personList}}"
+    wx:for-item="item"
+    wx:key="person"
+  >
+      <view
+        slot="label"
+        class="w-cell-label"
+        hover-class="none"
+        hover-stop-propagation="false"
+      >
+        <view
+        class="left"
+        hover-class="none"
+        hover-stop-propagation="false"
+        >
+          {{item.name}}
+        </view>
+        <view
+        style="font-size: 14px;color: #999999;"
+        class="right"
+        hover-class="none"
+        hover-stop-propagation="false"
+        >
+          10-31 09:12
+        </view>
+      </view>
+      <image
+      slot="icon"
+      class="w-cell-avatar"
+      src="{{item.imgUrl?item.imgUrl:'../../../static/imgs/default_male.png'}}"
+      />
+    </w-cell>
+</view>
+<!-- 未认证身份的用户 -->
+<view wx:else>未认证身份的用户</view>
