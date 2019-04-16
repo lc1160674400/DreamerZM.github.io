@@ -1,0 +1,5 @@
+{
+ "usingComponents": {
+    "w-tabs": "wuss-weapp/w-tabs/index"
+  }
+}
