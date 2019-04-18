@@ -15,12 +15,7 @@
         <w-cell label="我已阅读条款">
           <w-switch color="#fc9d9a" slot="content" />
         </w-cell>
-        <w-button
-        flat
-        full
-        type="warn"
-        >确定
-        </w-button>
+        <w-button flat full type="warn" >确定</w-button>
       </w-cell-group>
     </w-drop-menu> 
     <!-- 列表菜单 -->
@@ -33,34 +28,18 @@
     wx:for="{{personList}}"
     wx:for-item="item"
     wx:key="person"
+    data-userid="{{item.userid}}"
+    bind:onClick="getUserDetail"
   >
-      <view
-        slot="label"
-        class="w-cell-label"
-        hover-class="none"
-        hover-stop-propagation="false"
-      >
-        <view
-        class="left"
-        hover-class="none"
-        hover-stop-propagation="false"
-        >
+      <view slot="label" class="w-cell-label" hover-class="none" hover-stop-propagation="false">
+        <view class="left" hover-class="none" hover-stop-propagation="false" >
           {{item.name}}
         </view>
-        <view
-        style="font-size: 14px;color: #999999;"
-        class="right"
-        hover-class="none"
-        hover-stop-propagation="false"
-        >
+        <view style="font-size: 14px;color: #999999;" class="right" hover-class="none" hover-stop-propagation="false" >
           10-31 09:12
         </view>
       </view>
-      <image
-      slot="icon"
-      class="w-cell-avatar"
-      src="{{item.imgUrl?item.imgUrl:'../../../static/imgs/default_male.png'}}"
-      />
+      <image slot="icon" class="w-cell-avatar" src="{{item.imgUrl}}" />
     </w-cell>
 </view>
 <!-- 未认证身份的用户 -->

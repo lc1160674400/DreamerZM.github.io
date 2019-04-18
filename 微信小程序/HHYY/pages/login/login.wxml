@@ -11,9 +11,9 @@
       <view class="heart-piece-7"></view>
       <view class="heart-piece-8"></view>
     </view>
-    <p>equal love</p>
+    <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权进入</button>
   </view>
 </view>
-<view>
+<!-- <view>
   <button class='login-btn' open-type="getUserInfo" bindgetuserinfo="getUserInfo">花好月圆</button>
-</view>
+</view> -->

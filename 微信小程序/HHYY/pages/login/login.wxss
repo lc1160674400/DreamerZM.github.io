@@ -1,6 +1,8 @@
 /* pages/login/login.wxss */
 /* latin-ext */
-
+page{
+  background-color: #fc9d9a
+}
 .login-btn{
   position: fixed;
   z-index: 999;
@@ -54,12 +56,16 @@ body {
 .unit {
   text-align: center;
 }
-.unit p {
+.unit button {
   margin-top: 100px;
   font-family: 'Lato', sans-serif;
   font-weight: 100;
   text-transform: uppercase;
   color: #fff;
+  margin-bottom: 100px;
+  
+  background-color:#fc9d9a;
+  border:none;
 }
 .heart {
   position: relative;

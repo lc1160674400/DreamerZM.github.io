@@ -54,38 +54,88 @@ Page({
         content: '请您重新点击按钮，并在弹框中点击同意按钮便于为您提供更好的服务',
       })
     }else{
-      // app.globalData.userInfo = e.detail.userInfo
-      // this.setData({
-      //   userInfo: e.detail.userInfo,
-      //   hasUserInfo: true
-      // })
-      console.log(e)
-      var wechatId = e.detail.iv
-      var nickName = e.detail.userInfo.nickName
-      var avatarUrl = e.detail.userInfo.avatarUrl,gender=e.detail.userInfo.gender==1?'boye':'gile'
-      let role='ROLE_USER'
-      wx.request({
-        url: api.auth_register,
-        data: {
-          wechatId: wechatId,
-          nickName: nickName,
-          avatarUrl:avatarUrl,
-          gender:gender,
-          role:role
-        },
-        method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        //header: {"Content-Type":"application/x-www-form-urlencoded"}, // 设置请求的 header
-        success: function (res) {
-          console.log(JSON.stringify(res));
-        },
-        fail: function (res) {
-          console.log(JSON.stringify(res));
-        },
-        complete: function () {
-          // complete
+      wx.login({
+        success(res) {
+          if (res.code) {
+            console.log(res.code)
+            // 先根据临时凭证获取唯一openid
+            // api.get(api.url.get_openid,{js_code:res.code})
+            // .then((res)=>{
+            //   app.globalData.openid = res.data.openid
+            //   app.globalData.session_key = res.data.session_key
+            //   //获取到openid之后调用登录接口
+            //   return api.post(api.url.post_login,{
+            //     openid: app.globalData.openid,
+            //     nickName: e.detail.userInfo.nickName
+            //   })
+            // })
+            // .then((res)=>{
+            //   //登录接口时如果未注册直接调用注册接口
+            //   if(res.data.code == 500 && res.data.message=='无此用户'){
+            //     return api.post(api.url.post_register,{
+            //       openid: app.globalData.openid,
+            //       nickName: e.detail.userInfo.nickName,
+            //       avatarUrl: e.detail.userInfo.avatarUrl,
+            //       gender: e.detail.userInfo.gender == 1 ? 'boy' : 'girl',
+            //       role: 'ROLE_USER'
+            //     })
+            //   }
+            //   //如果已经注册直接登录跳转到首页
+            //   else{
+            //     app.globalData.userInfo = e.detail.userInfo
+            //     app.globalData.isLogin = true
+            //     wx.setStorage({
+            //       key: 'userInfo',
+            //       data: e.detail.userInfo,
+            //       success: () => {
+            //         wx.navigateBack({
+            //           url: '/pages/index/home/home',
+            //         })
+            //       }
+            //     })
+            //   }
+            // })
+            // .then((res)=>{
+            //   console.log('注册流程')
+            //   console.log(res)
+            // })
+            // .catch((e)=>{
+            //   console.log(e)
+            //   wx.showModal({
+            //     title: '注册失败',
+            //     content: e.message?e.message:'注册失败',
+            //   })
+            // })
+          } else {
+            console.log('登录失败！' + res.errMsg)
+          }
         }
       })
-      console.log(api)
+      // var wechatId = e.detail.iv
+      // var nickName = e.detail.userInfo.nickName
+      // var avatarUrl = e.detail.userInfo.avatarUrl,gender=e.detail.userInfo.gender==1?'boy':'girl'
+      // let role='ROLE_USER'
+      // wx.request({
+      //   url: api.auth_register,
+      //   data: {
+      //     wechatId: wechatId,
+      //     nickName: 'dsadsa',
+      //     avatarUrl:avatarUrl,
+      //     gender:gender,
+      //     role:role
+      //   },
+      //   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      //   header: {"Content-Type":"application/x-www-form-urlencoded"}, // 设置请求的 header
+      //   success: function (res) {
+      //     console.log(JSON.stringify(res));
+      //   },
+      //   fail: function (res) {
+      //     console.log(JSON.stringify(res));
+      //   },
+      //   complete: function () {
+      //     // complete
+      //   }
+      // })
     }
    
     

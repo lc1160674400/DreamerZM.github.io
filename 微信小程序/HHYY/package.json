@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "wuss-weapp": "^2.1.4"
+  },
+  "devDependencies": {
+    "es6-promise": "^4.2.6"
   }
 }

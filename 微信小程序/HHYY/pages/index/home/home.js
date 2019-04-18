@@ -1,4 +1,5 @@
 // pages/index/home/home.js
+const app = getApp()
 Page({
 
   /**
@@ -76,14 +77,40 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    function isUser(res) {
+      if (!res || !res.data) {
+        wx.showModal({
+          title: '暂未获取到用户信息',
+          content: '请同意授权获取用户信息',
+          showCancel: false,
+          cancelText: '退出',
+          confirmText: "进入授权",
+          success(res) {
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
+          }
+        })
+      }
+    }
+    wx.getStorage({
+      key: 'userInfo',
+      success: function (res) {
+        //如果缓存里面没有用户信息则会跳转到授权页面
+        isUser(res)
 
+      },
+      fail: () => {
+        isUser()
+      }
+    })
   },
 
   /**
@@ -139,21 +166,27 @@ Page({
         imgUrl: '../../../static/imgs/person/person.png',
         name: '李特',
         desc: '一个耿直的努力boy',
+        userid:"6678"
       },
         {
           imgUrl: '../../../static/imgs/person/person2.png',
           name: '李荣浩',
           desc: '我就是眼睛小你能拿我怎么样',
+          userid: "6778"
         },
         {
           imgUrl: '../../../static/imgs/person/person3.png',
           name: '薛之谦',
           desc: '我只会唱低音嘿嘿嘿情歌小王子',
+          userid: "6878"
+
+
         },
         {
           imgUrl: '',
           name: '毛不易',
           desc: '我念你清幽为不知道回复',
+          userid: "6978"
         }]
       f_setDefaultImg(personlist,'../../../static/imgs/default_male.png')
     }else if(this.data.activeTab == 1){
@@ -161,36 +194,43 @@ Page({
         imgUrl: '../../../static/imgs/person/famale1.png',
         name: '黛安乃',
         desc: '一个耿直的努力boy',
+        userid: "7078"
       },
       {
         imgUrl: '../../../static/imgs/person/famale2.png',
         name: '小萝莉',
         desc: '我就是眼睛小你能拿我怎么样',
+        userid: "7178"
       },
       {
         imgUrl: '../../../static/imgs/person/famale3.png',
         name: '御姐',
         desc: '我只会唱低音嘿嘿嘿情歌小王子',
+        userid: "7278"
       },
       {
         imgUrl: '../../../static/imgs/person/famale3.png',
         name: '小胖子',
         desc: '我只会唱低音嘿嘿嘿情歌小王子',
+        userid: "7378"
       },
       {
         imgUrl: '../../../static/imgs/person/famale4.png',
         name: '小可爱',
         desc: '我只会唱低音嘿嘿嘿情歌小王子',
+        userid: "7478"
       },
       {
         imgUrl: '../../../static/imgs/person/famale5.png',
         name: '可爱多',
         desc: '我只会唱低音嘿嘿嘿情歌小王子',
+        userid: "7578"
       },
       {
         imgUrl: '',
         name: '我最可爱',
         desc: '我念你清幽为不知道回复',
+        userid: "7678"
       }]
       f_setDefaultImg(personlist, '../../../static/imgs/default_female.png')
     }
@@ -211,7 +251,24 @@ Page({
       this.getPersonList()
     }
   },
-  
+  getUserDetail: function (event){
+    var userid = event.target.dataset.userid
+      var isCertification = wx.getStorage({
+        key: 'isCertification',
+        complete: (res) => {
+          console.log(res.data)
+          if (res.data) {
+            wx.navigateTo({
+              url: '/pages/user/detail/detail',
+            })
+          } else {
+            wx.navigateTo({
+              url: '/pages/user/certification/certification',
+            })
+          }
+        }
+      })
+  },
   checkNewVersion: function () { // 检查版本更新
     // 获取小程序更新机制兼容
     if (wx.canIUse("getUpdateManager")) {
