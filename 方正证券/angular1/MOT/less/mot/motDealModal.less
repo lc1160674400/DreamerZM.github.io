@@ -1,0 +1,152 @@
+
+.mot-deal-modal{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 12px;
+  right: 12px;
+  font-size: 14px;
+  box-shadow: 0 0 0.36rem 1px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  border-radius: 3px;
+  .deal-service-row{
+    background-color: #fdeded;
+    height: 35px;
+    line-height: 35px;
+    padding-left: 30px;
+  }
+  .deal-modal-title{
+    font-size:18px;
+    text-align: center;
+    line-height: 54px;
+  }
+  .deal-modal-foot{
+    margin: 12px 0;
+  }
+  .deal-modal-content{
+    overflow-y: auto;
+    .deal-info-section{
+      padding: 25px 0;
+      margin: 0 30px;
+      border-bottom: 1px dashed #d7d7d7;
+      &:last-child{
+        border-bottom: 0;
+      }
+      .info-section-title{
+        line-height: 14px;
+        font-size: 14px;
+        padding-left: 10px;
+        border-left: 3px solid #ed4b4a;
+        margin-bottom: 12px;
+        .info-section-subtitle{
+          font-size: 12px;
+          color: #999999;
+        }
+      }
+      .info-row{
+        color: #666666;
+        line-height: 2;
+        padding-left:13px;
+        word-break: break-all;
+      }
+      .info-btn-list{
+        padding: 10px 0;
+        .info-btn-item{
+          display: inline-block;
+          text-align: center;
+          font-size: 12px;
+          line-height: 12px;
+          width: 65px;
+          border-right: 1px solid #e3e3e3;
+          cursor: pointer;
+          &:last-child{
+            border-right: 0;
+          }
+        }
+      }
+      .info-content-box{
+        border: 1px solid #ced4da;
+        .info-content-title{
+          background-color: #fafafa;
+          line-height: 30px;
+          font-size:14px;
+          font-weight: bold;
+          padding-left: 12px;
+          border-bottom: 1px solid #ced4da;
+        }
+        .info-content-container{
+          padding: 12px;
+          font-size: 12px;
+          color: #666666;
+          .check-deal-item{
+            margin: 6px 0;
+            display: block;
+            .checkbox-lable{
+              position: relative;
+              cursor: pointer;
+              .deal-checkbox{
+                position: absolute;
+                left:0;
+                top:2px;
+              }
+              .check-deal-item-text{
+                padding-left: 20px;
+                line-height: 18px;
+              }
+            }
+          }
+        }
+      }
+      .info-content-other{
+        color: #666666;
+        padding-left: 13px;
+        padding-top: 12px;
+        .info-content-other-title{
+          font-size: 14px;
+          margin:6px 0;
+        }
+        .info-content-other-row{
+          font-size:12px;
+          margin:6px 0;
+          .other-row-check-item{
+            width: 50%;
+            margin-right: 0;
+          }
+        }
+      }
+
+      .cust-list-box{
+        width: 100%;
+        height: 200px;
+        border: 1px solid #ced4da;
+        overflow-y: auto;
+        .cust-check-list{
+          padding: 5px 0;
+          .cust-check-item{
+            float: left;
+            margin: 3px 10px;
+            .checkbox-lable{
+              position: relative;
+              cursor: pointer;
+              .deal-checkbox{
+                position: absolute;
+                left:0;
+                top:2px;
+              }
+              .check-deal-item-text{
+                padding-left: 20px;
+                line-height: 18px;
+                width: 100px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space:nowrap;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+}

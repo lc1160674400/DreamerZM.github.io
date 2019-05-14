@@ -1,0 +1,35 @@
+
+
+<div class="message-Audit-container" ng-controller="messageAuditDenyController" style="margin-bottom: 0px;">
+	<div class="modal fade " id="messageAuditDenyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document" style="width: 400px;">
+		    <div class="modal-content " >  
+		    	
+		    	<div class="modal-header">
+	                <button type="button" class="close"  ng-click="dismissRole()"><span aria-hidden="true">&times;</span></button>
+ 					<span class="modal-title mac-title-text" >提示</span>
+		        </div>
+
+
+		        <div class="modal-body main" style="padding-bottom: 30px;">
+					<div class="mac-body">				
+							<div class="mac-option">
+								<span class="mac-option-text">备注(非必须)：</span>
+					            <div class="form-wrap">
+								<textarea class="form-control"  ng-model="auditRemark" style="width: 350px;height: 80px;"></textarea>
+					            </div>
+							</div>
+					</div>
+				</div>
+
+
+		        <div class="modal-footer btn-list">
+	                <span class="btn btn-red mac-btn" ng-click="auditDenyFunc()" >提交</span>
+	                <span class="btn btn-red btn-outline mac-btn" ng-click="dismissRole()">取消</span>
+		        </div>
+		       
+
+		    </div>
+		</div>
+	</div>
+</div>

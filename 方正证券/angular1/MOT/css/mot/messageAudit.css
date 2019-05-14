@@ -1,0 +1,165 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors weizf (weizf@linkstec.com)
+ * @date    2018-11-21 10:58:34
+ * @version $Id$
+ */
+.message-Audit-container .msg-Audit-table-text {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #666666;
+}
+.message-Audit-container .msg-item-pointer {
+  cursor: pointer;
+}
+.message-Audit-container .msg-Audit-img {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  margin-right: 3px;
+  position: absolute;
+  left: 0;
+  top: 1px;
+}
+.message-Audit-container .msg-Audit-img.tong-guo-shen-he {
+  background-image: url("../../img/mot/tongguoshenhe_icon.png");
+  background-size: 100% 100%;
+}
+.message-Audit-container .msg-Audit-img.wei-tong-guo-shen-he {
+  background-image: url("../../img/mot/weitongguoshenhe_icon.png");
+  background-size: 100% 100%;
+}
+.message-Audit-container .msg-Audit-img.dao-chu {
+  background-image: url("../../img/mot/daochu_icon.png");
+  background-size: 100% 100%;
+}
+.message-Audit-container .msg-Audit-float-left {
+  float: left;
+}
+.message-Audit-container .msg-Audit-inline {
+  display: inline-block;
+}
+.message-Audit-container .msg-Audit-header {
+  padding: 0 0 10px 0;
+  border-bottom: 1px;
+  border-bottom-color: #EEEEEE;
+  border-bottom-style: solid;
+  background-color: #FFFFFF;
+}
+.message-Audit-container .msg-Audit-header .msg-Audit-title {
+  font-family: PingFangSC-Medium;
+  font-size: 14px;
+  color: #555555;
+  font-weight: bold;
+}
+.message-Audit-container .msg-Audit-filter-bl {
+  padding: 15px 0px 8px 0px;
+  background-color: #FFFFFF;
+  border-bottom: 1px;
+  border-bottom-color: #EEEEEE;
+  border-bottom-style: solid;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-normal {
+  margin-bottom: 9px;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-normal .msg-Audit-filter-input {
+  width: 180px;
+  height: 30px;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-normal .msg-Audit-filter-input .input-bl {
+  width: 100%;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-normal .msg-Audit-filter-select {
+  width: 130px;
+  height: 30px;
+  margin-left: 20px;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-advance {
+  background-color: #F3F3F3;
+  border: 1px solid #E8E8E8;
+  padding: 12px 10px;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-advance .msg-Audit-filter-advance-text {
+  text-align: center;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #666666;
+}
+.message-Audit-container .msg-Audit-filter-bl .msg-Audit-filter-advance .msg-Audit-filter-advance-text .msg-line {
+  line-height: 14px;
+}
+.message-Audit-container .msg-Audit-table {
+  padding: 8px 0px;
+  background-color: #FFFFFF;
+}
+.message-Audit-container .msg-Audit-table .msg-Audit-tableoption {
+  padding: 5.5px 12px;
+  background-color: #F3F3F3;
+  border: 1px solid #E8E8E8;
+}
+.message-Audit-container .msg-Audit-table .msg-Audit-tableoption .msg-Audit-tableoption-text {
+  margin-right: 35px;
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #555555;
+  text-align: right;
+  line-height: 16px;
+  padding-left: 17px;
+  position: relative;
+}
+.message-Audit-container .message-Audit-container .modal-header .mac-title-text {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #666666;
+}
+.message-Audit-container .message-Audit-container .modal-body {
+  overflow: inherit;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-bottom-border {
+  border-bottom: 1px dashed #EEEEEE;
+  padding-bottom: 20px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-top-space {
+  margin-top: 14px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .form-group {
+  margin-right: 20px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .form-group .form-wrap {
+  margin-left: 0px;
+  display: inherit;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-img {
+  margin: 0px 10px 0 10px;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-option-title {
+  margin-bottom: 20px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-option-title .mac-option-title-text {
+  font-family: PingFangSC-Regular;
+  font-size: 12px;
+  color: #666666;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-option-text {
+  font-family: PingFangSC-Regular;
+  font-size: 14px;
+  color: #555555;
+  letter-spacing: 0.22px;
+  margin-right: 5px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-date-bl {
+  width: 133px;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-input-control {
+  width: 100%;
+}
+.message-Audit-container .message-Audit-container .modal-body .mac-body .mac-input-bl {
+  width: 116px;
+}
+.message-Audit-container .message-Audit-container .modal-footer .mac-btn {
+  width: 100px;
+}

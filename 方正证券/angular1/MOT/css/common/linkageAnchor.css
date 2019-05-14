@@ -1,0 +1,89 @@
+@charset "UTF-8";
+/**
+ * 
+ * @authors joyXie (xiec@linkstec.com)
+ * @date    2018-05-25 15:33:57
+ * @version 锚点功能
+ */
+.left-info-navigation {
+  background-color: #ffffff;
+  width: 160px;
+  padding: 20px 0;
+  border: 1px solid #eeeeee;
+  border-top: 2px solid #4CB2F9;
+  position: fixed;
+  right: 35px;
+  bottom: 35px;
+}
+.left-info-navigation .left-nav-list {
+  width: 100%;
+}
+.left-info-navigation .left-nav-list .left-nav-item {
+  width: 100%;
+  padding: 6px 0 6px 25px;
+  line-height: 28px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active {
+  color: #4CB2F9;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active .nav-active-symbol {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -17px;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active .nav-active-symbol .symbol-top {
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-right: 5px solid transparent;
+  border-left: 2px solid #4CB2F9;
+  border-bottom: 5px solid #4CB2F9;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active .nav-active-symbol .symbol-top::before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  top: 12px;
+  left: -1px;
+  border-top: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active .nav-active-symbol .symbol-bottom {
+  display: block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid #1890FF;
+  border-right: 5px solid transparent;
+  border-left: 2px solid #1890FF;
+  border-bottom: 11px solid transparent;
+}
+.left-info-navigation .left-nav-list .left-nav-item.left-nav-active .nav-active-symbol .symbol-bottom:before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 0;
+  height: 0;
+  bottom: 12px;
+  left: -1px;
+  border-bottom: 2px solid transparent;
+  border-right: 2px solid transparent;
+  border-left: 2px solid #ffffff;
+  border-top: 2px solid #ffffff;
+}
+.right-info-container {
+  /*margin-left: 185px;*/
+  overflow: hidden;
+}

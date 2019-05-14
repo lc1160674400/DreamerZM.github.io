@@ -1,0 +1,152 @@
+<div ng-controller="resultAnalysisController" class="page-container result-analysis mot-board-page" ng-mouseup="otherAreaClosePanel($event)">
+
+    <div class="mot-board-container">
+        <div class="search-row">
+            <div class="form-group inline-form-group" style="width: 250px;">
+                <label class="form-label">分析维度</label>
+                <div class="form-wrap-con">
+                    <div class="form-wrap">
+                        <select linkage-select ng-model="searchParams.fxwd" data-style="form-control" data-width="100%" data-size="5" >
+                            <option value="1">总体分析</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="form-group inline-form-group" style="width: 250px;">-->
+                <!--<label class="form-label">分析名称</label>-->
+                <!--<div class="form-wrap-con">-->
+                    <!--<div class="form-wrap">-->
+                        <!--<select linkage-select ng-model="searchParams.fxmc" data-style="form-control" data-width="100%" data-size="5" >-->
+                            <!--<option value="">请选择</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="search-row">
+            <div class="form-group inline-form-group" style="width: 425px;">
+                <label class="form-label">选择日期</label>
+                <div class="form-wrap-con">
+                    <div class="form-wrap" style="width: 100%;display: inline-block;">
+                        <input type="text"
+                               style="background-color: #fff;cursor: pointer;"
+                               readonly
+                               class="form-control"
+                               datetimepicker
+                               daterange
+                               format="yyyyMMdd"
+                               date-range="~"
+                               placeholder="请选择时间区间"
+                               ng-model="searchParams.dateRange"
+                               change-fun="changeDate()">
+                    </div>
+                    <!--<div class="form-wrap" style="width: 46%;display: inline-block;margin-right: 2px;">-->
+                        <!--<input type="text" class="form-control" ng-change="getZbData()" ng-model="searchParams.dateStart" max-date="searchParams.dateEnd" datetimepicker format="yyyyMMdd">-->
+                    <!--</div>-->
+                    <!--至-->
+                    <!--<div class="form-wrap" style="width: 46%;display: inline-block;margin-left: 2px;">-->
+                        <!--<input type="text" class="form-control" ng-change="getZbData()" ng-model="searchParams.dateEnd" min-date="searchParams.dateStart" datetimepicker format="yyyyMMdd">-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div class="search-btn-list">
+                <span class="search-btn"
+                      ng-class="{'active':dateTypeItem.key == currentDateType}"
+                      ng-repeat="dateTypeItem in dateTypeList track by $index"
+                      ng-click="changeDateType(dateTypeItem)">{{dateTypeItem.value}}</span>
+            </div>
+        </div>
+        <div class="rate-box" ng-class="{'rate-null':tabData.length==0}">
+            <div class="rate-bg-box">
+                <div class="rate-item-border" ng-style="{'width':percentWidth[tabData.length]}" ng-repeat="tabDataItem in tabData track by $index"></div>
+            </div>
+            <div class="rate-row">
+                <div class="rate-item"
+                     ng-style="{'width':percentWidth[tabData.length]}"
+                     ng-class="{'active':tabDataItem.indexKey == currentTab}"
+                     ng-repeat="tabDataItem in tabData track by $index"
+                     ng-click="changeTab(tabDataItem)">
+                    <div class="rate-num">
+                        <span class="rate-big-num first">{{replacePercent(tabDataItem.indexValue)}}</span>%
+                    </div>
+                    <div class="rate-title">
+                        <div class="rate-title-text">
+                            {{tabDataItem.indexName}}
+                        </div>
+                        <span class="rate-tooltips-icon"></span>
+                    </div>
+                    <div class="rate-bottom-border"></div>
+                </div>
+            </div>
+        </div>
+        <div class="chart-row">
+            <no-data style="height: 375px;padding-top: 130px;" ng-if="legendList.length == 0"></no-data>
+            <div ng-hide="legendList.length == 0" class="chart-box" linkage-charts chart-config="chartConfig"></div>
+            <ul class="legend-box clear-float">
+                <li class="legend-item fl" ng-repeat="legendItem in legendList track by $index">
+                    <i class="line-legend-icon-line" ng-if="checkType(legendItem) == 'line'" ng-style="{'background-color':colorList[$index]}"></i>
+                    <i class="legend-item-icon"
+                       ng-class="{'line-legend-icon':checkType(legendItem) == 'line','default-legend-icon':checkType(legendItem) != 'line'}"
+                       ng-style="{'background-color':colorList[$index]}"></i>{{legendItem.name}}</li>
+                <li class="no-select legend-item fl other-legend" ng-if="legendAllList.length > legendList.length" ng-click="openPanel()"><i class="legend-item-icon other-legend-icon"></i>其他指标</li>
+            </ul>
+        </div>
+        <!--筛选部分-->
+        <div class="filter-wrap panel-close-ignore" style="min-height: 0;top:-80px;" ng-show="showPanel">
+            <!--筛选条件 待选择-->
+            <div class="filter-panel-wrap" >
+                <div class="filter-panel-close-btn" ng-click="closePanel()"><i class="lk-icon lk-icon-arrowU-o" style="font-weight: bold;"></i>收起</div>
+                <div class="filter-panel-container" ng-style="{'max-height':windowHeight-200,'overflow':'hidden'}" style="background-color: #fff;">
+                    <div class="filter-top-box">
+                        <div class="filter-top-wrap">
+                            <div class="filter-btn-row">
+                                <span class="filter-title">已选择指标</span>
+                                <div class="btn-list fr">
+                                    <span class="btn btn-red" ng-click="submitFilter()">保存</span>
+                                    <span class="btn btn-default" style="background-color: #f8f9fa;" ng-click="resetFilter()">重置</span>
+                                </div>
+                            </div>
+                            <div class="filter-row">
+                                <div class="filter-null-row" style="height: 32px;" ng-if="legendCheckedList.length == 0">请从下方勾选指标</div>
+                                <ul class="filter-form-list">
+                                    <li class="form-group inline-form-group filter-form-group" ng-repeat="legendCheckedItem in legendCheckedList track by $index">
+                                        <label class="form-label" style="float: unset;padding-right: 0;vertical-align: middle;">{{legendCheckedItem.value}}</label>
+                                        <i class="lk-icon lk-icon-cancel-o filter-remove-icon" ng-click="removeChecked(legendCheckedItem,$index)"></i>
+                                    </li>
+                                </ul>
+                                <div class="text-right">
+                                    <span class="btn btn-red btn-outline" ng-click="clearChecked()">清空</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-top-box">
+                        <div class="filter-top-wrap" style="border-bottom: 0;">
+                            <div class="filter-btn-row">
+                                <span class="filter-title">未选择</span>
+                            </div>
+                            <div style="min-height: 36px;">
+                                <div class="checkbox-label-item" style="margin-right: 20px;margin-bottom: 6px;" ng-repeat="legendAllItem in legendAllList track by $index">
+                                    <label class="checkbox-lable" style="font-weight: normal;">
+                                        <input type="checkbox" name="hobby1" ng-model="legendAllItem.isChecked" ng-change="changeChecked(legendAllItem)"/>
+                                        <span style="vertical-align: middle;line-height: 18px;">{{legendAllItem.value}}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--筛选部分 end-->
+    </div>
+
+    <div class="table-box">
+        <div style="background-color: #F3F3F3;">
+            <span class="no-select text-btn" ng-click="exportExcel()"><i class="text-btn-icon"></i>导出EXCEL</span>
+        </div>
+        <linkage-table style="min-height: 245px;" columns="columnsConfig" data="dataList" setting-flag="true"></linkage-table>
+        <div style="height: 50px;"></div>
+    </div>
+
+</div>

@@ -1,0 +1,144 @@
+
+<div class="mot-deal-modal" ng-controller="motDealModalController" ng-style="{'height':windowHeight-12}">
+
+    <div class="deal-service-row">
+        为 <span class="text-red">{{getDataFromBo.custName}}（{{showCustNo}}）</span> 服务中...
+    </div>
+    <div class="deal-modal-title">
+        {{getDataFromBo.eventName}}
+    </div>
+    <div class="deal-modal-content" ng-style="{'height':windowHeight-12-35-54-54}">
+        <section class="deal-info-section">
+            <div class="info-section-title">处理说明</div>
+            <div class="info-row">事件描述：{{getDataFromBo.eventDesc}}</div>
+            <div class="info-row">事件处理说明：{{getDataFromBo.strategyDesc}}</div>
+        </section>
+        <section class="deal-info-section">
+            <div class="info-section-title">客户信息 <span class="info-section-subtitle">事件相关</span></div>
+            <div class="info-row">
+                <span style="width: 33%" ng-repeat="appendInfoItem in appendInfoList track by $index">{{appendInfoItem.name}}：{{appendInfoItem.value}}</span>
+            </div>
+        </section>
+        <section class="deal-info-section">
+            <div class="info-section-title">处理方式</div>
+            <div class="info-btn-list">
+                <span class="no-select info-btn-item"
+                      ng-class="{'text-blue':dealTabItem.key == currentDealTab}"
+                      ng-repeat="dealTabItem in dealTabList track by $index"
+                      ng-click="changDealTab(dealTabItem)">{{dealTabItem.value}}</span>
+            </div>
+            <!--打电话部分-->
+            <div ng-show="currentDealTab == 'phone'">
+                <div class="info-content-box">
+                    <div class="info-content-title">话术</div>
+                    <div class="info-content-container">
+                        <div class="checkbox-label-item check-deal-item" ng-repeat="mobileContentItem in mobileContentList track by $index">
+                            <label class="checkbox-lable" style="font-weight: normal;">
+                                <input type="checkbox" class="deal-checkbox"/>
+                                <span class="check-deal-item-text">{{mobileContentItem.name + '：' + mobileContentItem.content}}</span>
+                            </label>
+                        </div>
+                        <div class="checkbox-label-item check-deal-item" ng-if="mobileContentList.length == 0">
+                            <label class="checkbox-lable" style="font-weight: normal;">
+                                <span class="check-deal-item-text">暂无话术</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="info-content-other clear-float">-->
+                    <!--<div class="fl" style="width: 50%;">-->
+                        <!--<div class="info-content-other-title">选择主叫号码</div>-->
+                        <!--<div class="info-content-other-row">-->
+                            <!--<div class="checkbox-label-item fl other-row-check-item" ng-repeat="staffMobileItem in staffMobileList track by $index">-->
+                                <!--<label class="checkbox-lable" style="font-weight: normal;">-->
+                                    <!--<input type="checkbox" ng-model="staffMobileItem.isChecked" ng-change="changeMobileCheck(staffMobileItem,$index)"/>-->
+                                    <!--<span style="vertical-align: middle;line-height: 18px;">{{staffMobileItem.mobileTel}}</span>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="fl" style="width: 50%;">-->
+                        <!--<div class="info-content-other-title">选择客户号码</div>-->
+                        <!--<div class="info-content-other-row">-->
+                            <!--<div class="checkbox-label-item fl other-row-check-item">-->
+                                <!--<label class="checkbox-lable" style="font-weight: normal;">-->
+                                    <!--<input type="checkbox" ng-model="mobileCheckFlag"/>-->
+                                    <!--<span style="vertical-align: middle;line-height: 18px;">{{customerMobile}}</span>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <!--打电话部分 end-->
+
+            <!--发短信部分-->
+            <div ng-show="currentDealTab == 'message'">
+                <div class="info-content-box">
+                    <div class="info-content-title">模版</div>
+                    <div class="info-content-container">
+                        <div class="checkbox-label-item check-deal-item" style="margin-bottom: 12px;" ng-repeat="messageContentItem in messageContentList track by $index">
+                            <label class="checkbox-lable" style="font-weight: normal;" ng-if="messageContentItem.name != '-1'">
+                                <input type="checkbox" class="deal-checkbox" ng-model="messageContentItem.isChecked" ng-change="changeTemplateCheck(messageContentItem,$index)"/>
+                                <span class="check-deal-item-text">{{messageContentItem.name}}<br/>{{messageContentItem.content}}</span>
+                            </label>
+                            <div class="checkbox-label-item check-deal-item" ng-if="messageContentItem.name == '-1'">
+                                <label class="checkbox-lable" style="font-weight: normal;">
+                                    <input type="checkbox" class="deal-checkbox" ng-model="messageContentItem.isChecked" ng-change="changeTemplateCheck(messageContentItem,$index)"/>
+                                    <span class="check-deal-item-text">自定义模版</span>
+                                </label>
+                            </div>
+                            <div class="form-wrap" style="padding-left: 20px;width: 100%;" ng-if="messageContentItem.name == '-1'">
+                                <textarea class="form-control" ng-model="messageContentItem.content" style="width: 100%;height: 60px;background-color: #fafafa;" ng-disabled="!messageContentItem.isChecked" placeholder="请输入自定义短信模版内容..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--发短信部分 end-->
+
+            <!--填备注部分-->
+            <div ng-show="currentDealTab == 'mark'">
+                <div class="form-wrap" style="width: 100%;">
+                    <textarea ng-model="markContent" maxlength="500" ng-disabled="!hasMarkPower" class="form-control" style="width: 100%;height: 200px;background-color: #fafafa;padding: 12px 15px;color:#555;" placeholder="请填写备注内容..."></textarea>
+                </div>
+            </div>
+            <!--填备注部分-->
+
+        </section>
+    </div>
+    <!--打电话部分-->
+    <div class="btn-list deal-modal-foot" ng-if="currentDealTab == 'phone' && hasPower">
+        <span class="btn btn-red" ng-click="submitCall()">语音回拨</span>
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--打电话部分 end-->
+
+    <!--发短信部分-->
+    <div class="btn-list deal-modal-foot" ng-if="currentDealTab == 'message' && hasPower">
+        <span class="btn btn-red" ng-click="sendMessage()">发送</span>
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--发短信部分 end-->
+
+    <!--发短信部分\打电话部分\空-->
+    <div class="btn-list deal-modal-foot" ng-if="dealTabList.length == 0 || (!hasPower && currentDealTab != 'mark')">
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--发短信部分\打电话部分\空 end-->
+
+
+    <!--填备注部分-->
+    <div class="btn-list deal-modal-foot" ng-if="currentDealTab == 'mark' && hasMarkPower">
+        <span class="btn btn-red" ng-click="saveMark()">保存</span>
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--填备注部分 end-->
+
+    <!--填备注部分-->
+    <div class="btn-list deal-modal-foot" ng-if="!hasMarkPower && currentDealTab == 'mark'">
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--填备注部分 end-->
+
+</div>

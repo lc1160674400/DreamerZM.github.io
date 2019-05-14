@@ -1,0 +1,78 @@
+
+<div class="mot-deal-modal" ng-controller="batchMessageModalController" ng-style="{'height':windowHeight-12}">
+
+    <div class="deal-modal-content" ng-style="{'height':windowHeight-12-54}">
+        <section class="deal-info-section">
+
+            <div>
+                <div class="form-group inline-form-group" style="width: 300px;">
+                    <label class="form-label" style="width:70px;">选择事件</label>
+                    <div class="form-wrap-con" style="margin-left: 70px;">
+                        <div class="form-wrap">
+                            <select linkage-select ng-model="chooseEventId" ng-change="changeEvent()" data-style="form-control" data-width="100%" data-live-search="true" data-size="5" >
+                                <option value="">请选择</option>
+                                <option ng-repeat="eventItem in eventList track by $index" value="{{eventItem.eventId}}">{{eventItem.eventName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form-group inline-form-group" style="width: 100%;margin-bottom: 30px;">
+                    <label class="form-label" style="width: 70px;">接收客户</label>
+                    <div class="form-wrap-con" style="margin-left: 70px;">
+                        <div class="cust-list-box">
+                            <ul class="cust-check-list clear-float">
+                                <li class="cust-check-item" ng-repeat="custItem in custList track by $index">
+                                    <label class="checkbox-lable" style="font-weight: normal;">
+                                        <input type="checkbox" class="deal-checkbox" ng-model="custCheckList[$index]" ng-change="changeCustCheck(custItem,$index)"/>
+                                        <span class="check-deal-item-text" title="{{custItem.custName}}">{{custItem.custName}}</span>
+                                    </label>
+                                </li>
+                            </ul>
+                            <no-data ng-if="chooseEventId == ''" tip-text="'请先选择事件'"></no-data>
+                            <no-data ng-if="chooseEventId != '' && custList.length == 0" tip-text="'该事件暂无可发送短信的客户'"></no-data>
+                        </div>
+                    </div>
+                    <div style="margin-left: 70px;font-size: 12px;" class="text-red">*可针对一个事件批量发送短信，仅支持可发送短信的事件</div>
+                </div>
+            </div>
+
+            <!--发短信部分-->
+            <div>
+                <div class="info-content-box">
+                    <div class="info-content-title">模版</div>
+                    <div class="info-content-container">
+                        <div class="checkbox-label-item check-deal-item" style="margin-bottom: 12px;" ng-repeat="messageContentItem in messageContentList track by $index">
+                            <label class="checkbox-lable" style="font-weight: normal;" ng-if="messageContentItem.name != '-1'">
+                                <input type="checkbox" class="deal-checkbox" ng-model="messageContentItem.isChecked" ng-change="changeTemplateCheck(messageContentItem,$index)"/>
+                                <span class="check-deal-item-text">{{messageContentItem.name}}<br/>{{messageContentItem.content}}</span>
+                            </label>
+                            <div class="checkbox-label-item check-deal-item" ng-if="messageContentItem.name == '-1'">
+                                <label class="checkbox-lable" style="font-weight: normal;">
+                                    <input type="checkbox" class="deal-checkbox" ng-model="messageContentItem.isChecked" ng-change="changeTemplateCheck(messageContentItem,$index)"/>
+                                    <span class="check-deal-item-text">自定义模版</span>
+                                </label>
+                            </div>
+                            <div class="form-wrap" style="padding-left: 20px;width: 100%;" ng-if="messageContentItem.name == '-1'">
+                                <textarea class="form-control" ng-model="messageContentItem.content" style="width: 100%;height: 60px;background-color: #fafafa;" ng-disabled="!messageContentItem.isChecked" placeholder="请输入自定义短信模版内容..."></textarea>
+                            </div>
+                        </div>
+                        <no-data ng-if="chooseEventId == ''" tip-text="'请先选择事件'"></no-data>
+
+                    </div>
+                </div>
+            </div>
+            <!--发短信部分 end-->
+
+        </section>
+    </div>
+
+    <!--发短信部分-->
+    <div class="btn-list deal-modal-foot">
+        <span class="btn btn-red" ng-click="sendMessage()">发送</span>
+        <span class="btn btn-default" ng-click="closeDealModal()">关闭</span>
+    </div>
+    <!--发短信部分 end-->
+
+</div>

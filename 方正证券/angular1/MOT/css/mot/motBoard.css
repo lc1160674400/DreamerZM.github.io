@@ -1,0 +1,414 @@
+.mot-board-page .no-select {
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Chrome/Safari/Opera */
+  -khtml-user-select: none;
+  /* Konqueror */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently not supported by any browser */
+}
+.mot-board-page .mot-board-container {
+  padding: 18px;
+  background-color: #fff;
+}
+.mot-board-page .mot-board-container .search-row {
+  padding-bottom: 12px;
+}
+.mot-board-page .mot-board-container .search-row .no-label {
+  margin-left: 0;
+}
+.mot-board-page .mot-board-container .search-row .inline-form-group {
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-bottom: 0;
+  margin-top: 2px;
+}
+.mot-board-page .mot-board-container .search-row .search-item {
+  width: 180px;
+}
+.mot-board-page .mot-board-container .filter-wrap {
+  width: 100%;
+  position: relative;
+  color: #666666;
+  min-height: 36px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap {
+  width: 100%;
+  border: 1px solid #dce5f1;
+  background-color: #f6f7f9;
+  padding: 2px 0;
+  min-height: 36px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-down-btn-icon {
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+  right: 6px;
+  top: 0;
+  color: #666666;
+  cursor: pointer;
+  padding: 0 9px;
+  line-height: 36px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-null-btn {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  text-align: center;
+  color: #666666;
+  left: 0;
+  top: 0;
+  padding: 8px 9px;
+  cursor: pointer;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-null-btn .filter-null-btn-text {
+  line-height: 20px;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-null-btn .filter-null-btn-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box {
+  margin-right: 24px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list {
+  padding: 0 12px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-list-item {
+  margin: 2px 0;
+  vertical-align: middle;
+  display: inline-block;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-list-title {
+  line-height: 26px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item {
+  margin-right: 12px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-remove-icon {
+  color: #aaa;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-remove-icon:hover {
+  color: #6c757d;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con {
+  margin-left: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .filter-form-item-label {
+  font-size: 12px;
+  color: #495057;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .filter-form-item-value {
+  font-size: 12px;
+  color: #495057;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .dropdown-menu.inner {
+  max-height: 160px;
+  overflow-y: auto;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .dropdown-menu.inner .dropdown-input-row {
+  height: 36px;
+  padding: 3px 6px 0;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .dropdown-menu.inner .dropdown-date-row {
+  height: 36px;
+  padding: 0 6px 6px;
+  min-width: 272px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-result-wrap .filter-list-box .filter-list .filter-form-item .filter-form-item-con .dropdown-menu.inner .dropdown-btn-row {
+  border-top: 1px solid #C7C7D1;
+  text-align: center;
+  cursor: pointer;
+  font-size: 12px;
+  height: 26px;
+  line-height: 26px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap {
+  width: 100%;
+  position: absolute;
+  z-index: 50;
+  left: 0;
+  top: 0;
+  right: 0;
+  background-color: #fafafa;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-close-btn {
+  width: 60px;
+  height: 24px;
+  line-height: 23px;
+  border-radius: 3px 3px 0 0;
+  background-color: #f9f9f9;
+  color: #999;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-top: -24px;
+  margin-left: -30px;
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-left: 1px solid #e5e5e5;
+  text-align: center;
+  cursor: pointer;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container {
+  box-shadow: 0 0 0.36rem 1px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  padding-bottom: 12px;
+  position: relative;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .back-to-top {
+  background-image: url('../../img/mot/icon-backtop.png');
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  background-size: 100% 100%;
+  cursor: pointer;
+  z-index: 10;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box {
+  background-color: #fff;
+  border-radius: 3px 3px 0 0;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap {
+  padding: 20px 0 9px;
+  margin: 0 21px;
+  border-bottom: 1px dashed #d7d7d7;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-btn-row {
+  height: 35px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-btn-row .filter-title {
+  line-height: 30px;
+  font-size: 14px;
+  color: #222;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row {
+  min-height: 35px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-null-row {
+  color: #999999;
+  text-align: center;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group {
+  margin-right: 12px;
+  margin-bottom: 6px;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .form-label {
+  display: inline-block;
+  width: auto;
+  text-align: left;
+  color: #666666;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .form-wrap-con {
+  display: inline-block;
+  min-width: 125px;
+  margin-left: 0;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .form-wrap-con.input-form-wrap-con {
+  width: 125px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .form-wrap-con.date-form-wrap-con {
+  width: 272px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .filter-remove-icon {
+  color: #dee2e6;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-top-box .filter-top-wrap .filter-row .filter-form-list .filter-form-group .filter-remove-icon:hover {
+  color: #6c757d;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box {
+  overflow-y: auto;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section {
+  margin: 0 21px;
+  padding: 9px 0;
+  border-bottom: 1px dashed #d7d7d7;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section:last-child {
+  border-bottom: 0;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-section-title {
+  margin-bottom: 6px;
+  font-weight: normal;
+  border-left: 3px solid #ed4b4a;
+  line-height: 13px;
+  padding-left: 5px;
+  padding-right: 3px;
+  color: #222;
+  font-size: 13px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-section-title .filter-section-title-text {
+  vertical-align: middle;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-section-title .filter-section-slide {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #ccc;
+  padding: 0;
+  text-align: center;
+  color: #ccc;
+  margin-left: 3px;
+  vertical-align: middle;
+  line-height: 10px;
+  cursor: pointer;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-section-title .filter-section-slide .lk-icon {
+  font-size: 12px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-select-content {
+  padding-top: 6px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-select-content .filter-select-row {
+  padding-bottom: 6px;
+}
+.mot-board-page .mot-board-container .filter-wrap .filter-panel-wrap .filter-panel-container .filter-bottom-box .filter-section .filter-select-content .filter-select-row .filter-select-item {
+  padding-bottom: 1px;
+  min-width: 14.2857%;
+  padding-right: 0.5rem;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row {
+  background-color: #f3f3f3;
+  color: #666;
+  font-size: 12px;
+  width: 100%;
+  height: 30px;
+  padding: 2px 12px;
+  line-height: 24px;
+  border: 1px solid #e5e5e5;
+  border-bottom: 0;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn {
+  cursor: pointer;
+  margin-right: 6px;
+  position: relative;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn:hover .slide-action-box {
+  display: block;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box {
+  display: none;
+  width: 76px;
+  padding: 0 0;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 99;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box .slide-action-box-row {
+  padding-left: 30px;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: 10px center;
+  font-size: 12px;
+  line-height: 35px;
+  color: #666666;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box .slide-action-box-row.active {
+  background-color: #fdeded;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box .slide-action-box-row:hover {
+  background-color: #fdeded;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box .slide-action-box-row.xuchuli {
+  background-image: url("../../img/mot/xuchuli.png");
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .slide-action-btn .slide-action-box .slide-action-box-row.youjihui {
+  background-image: url("../../img/mot/youjihui.png");
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn {
+  margin: 0 6px;
+  cursor: pointer;
+  padding-left: 21px;
+  background-size: 14px 14px;
+  background-position: 3px center;
+  background-repeat: no-repeat;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.disabled {
+  opacity: .65;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.caozuo-btn {
+  background-image: url('../../img/mot/caozuo.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.caozuo-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.hulve-btn {
+  background-image: url('../../img/mot/hulve.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.hulve-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.jianyi-btn {
+  background-image: url('../../img/mot/jianyi.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.jianyi-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.piliangdianhua-btn {
+  background-image: url('../../img/mot/icon-dianhua1@2x.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.piliangdianhua-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.daochu-btn {
+  background-image: url('../../img/mot/daochu_icon.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.daochu-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.dingyue-btn {
+  background-image: url('../../img/mot/dingyue.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.dingyue-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.piliangduanxin-btn {
+  background-image: url('../../img/mot/piliangduanxin.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.piliangduanxin-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.pilianghulve-btn {
+  background-image: url('../../img/mot/pilianghulve.png');
+}
+.mot-board-page .mot-board-container .table-page-box .table-action-row .table-action-btn.pilianghulve-btn:active {
+  background-image: none;
+}
+.mot-board-page .mot-board-container .table-page-box .mot-cust-td .mot-phone {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
+  background-image: url("../../img/mot/icon-dianhua1@2x.png");
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-left: 5px;
+  cursor: pointer;
+}
+.mot-board-page .mot-board-container .table-page-box .mot-cust-td .mot-cust {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,208 @@
+.result-analysis .search-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+.result-analysis .search-row .form-group {
+  margin-bottom: 0;
+}
+.result-analysis .search-row .form-group .form-label {
+  width: 80px;
+}
+.result-analysis .search-row .form-group .form-wrap-con {
+  margin-left: 80px;
+}
+.result-analysis .search-row .search-btn-list {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 20px;
+}
+.result-analysis .search-row .search-btn-list .search-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  line-height: 18px;
+  border-top: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+  cursor: pointer;
+}
+.result-analysis .search-row .search-btn-list .search-btn.active {
+  background-color: #ed4b4a;
+  color: #fff;
+}
+.result-analysis .search-row .search-btn-list .search-btn:first-child {
+  border-radius: 2px 0 0 2px;
+}
+.result-analysis .search-row .search-btn-list .search-btn:last-child {
+  border-right: 1px solid #cccccc;
+  border-radius: 0 2px 2px 0;
+}
+.result-analysis .rate-box {
+  width: 100%;
+  height: 140px;
+  position: relative;
+  background-color: #f3f3f3;
+}
+.result-analysis .rate-box.rate-null {
+  background-color: #fff;
+}
+.result-analysis .rate-box.rate-null .rate-row {
+  border-bottom: 0;
+}
+.result-analysis .rate-box .rate-bg-box {
+  position: absolute;
+  width: 100%;
+  top: 45px;
+  left: 0;
+}
+.result-analysis .rate-box .rate-bg-box .rate-item-border {
+  width: 20%;
+  height: 42px;
+  float: left;
+  border-right: 1px solid #DCE5F1;
+}
+.result-analysis .rate-box .rate-bg-box .rate-item-border:last-child {
+  border-right: 0;
+}
+.result-analysis .rate-box .rate-row {
+  width: 100%;
+  height: 140px;
+  border-bottom: 1px solid #EEEEEE;
+}
+.result-analysis .rate-box .rate-row .rate-item {
+  width: 20%;
+  height: 139px;
+  float: left;
+  padding-top: 30px;
+  cursor: pointer;
+  color: #999999;
+  position: relative;
+}
+.result-analysis .rate-box .rate-row .rate-item.active {
+  background-color: #fff;
+}
+.result-analysis .rate-box .rate-row .rate-item.active .rate-num .rate-big-num {
+  color: #ed4b4a;
+}
+.result-analysis .rate-box .rate-row .rate-item.active .rate-title {
+  color: #555555;
+}
+.result-analysis .rate-box .rate-row .rate-item.active .rate-bottom-border {
+  position: absolute;
+  width: 80px;
+  height: 3px;
+  background-color: #ed4b4a;
+  bottom: 0;
+  left: 50%;
+  margin-left: -40px;
+}
+.result-analysis .rate-box .rate-row .rate-item .rate-num {
+  text-align: center;
+  font-size: 12px;
+}
+.result-analysis .rate-box .rate-row .rate-item .rate-num .rate-big-num {
+  font-size: 26px;
+}
+.result-analysis .rate-box .rate-row .rate-item .rate-title {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  padding-left: 20px;
+}
+.result-analysis .rate-box .rate-row .rate-item .rate-title .rate-title-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+.result-analysis .rate-box .rate-row .rate-item .rate-title .rate-tooltips-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  background-image: url("../../img/mot/shuomingtishi_icon.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-left: 4px;
+}
+.result-analysis .chart-row {
+  padding: 0 55px 0 45px;
+}
+.result-analysis .chart-row .chart-box {
+  width: 100%;
+  height: 375px;
+}
+.result-analysis .chart-row .legend-box {
+  height: 80px;
+}
+.result-analysis .chart-row .legend-box .legend-item {
+  margin-right: 20px;
+  padding-left: 20px;
+  position: relative;
+  line-height: 20px;
+  color: #545454;
+  cursor: pointer;
+}
+.result-analysis .chart-row .legend-box .legend-item.other-legend:hover {
+  text-decoration: underline;
+}
+.result-analysis .chart-row .legend-box .legend-item .line-legend-icon-line {
+  display: block;
+  width: 18px;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  top: 9px;
+}
+.result-analysis .chart-row .legend-box .legend-item .legend-item-icon {
+  display: block;
+  position: absolute;
+}
+.result-analysis .chart-row .legend-box .legend-item .legend-item-icon.default-legend-icon {
+  width: 12px;
+  height: 12px;
+  left: 0;
+  top: 4px;
+  border-radius: 1px;
+}
+.result-analysis .chart-row .legend-box .legend-item .legend-item-icon.line-legend-icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  left: 3px;
+  top: 4px;
+}
+.result-analysis .chart-row .legend-box .legend-item .legend-item-icon.other-legend-icon {
+  width: 18px;
+  height: 18px;
+  background-image: url("../../img/mot/qitazhibiao_icon.png");
+  left: 0;
+  top: 1px;
+}
+.result-analysis .table-box {
+  margin-top: 20px;
+  background-color: #ffffff;
+  border: 1px solid #E8E8E8;
+}
+.result-analysis .table-box .text-btn {
+  line-height: 30px;
+  font-size: 12px;
+  color: #555555;
+  margin-left: 20px;
+  position: relative;
+  padding-left: 20px;
+  cursor: pointer;
+}
+.result-analysis .table-box .text-btn:active .text-btn-icon {
+  display: none;
+}
+.result-analysis .table-box .text-btn .text-btn-icon {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("../../img/mot/daochu_icon.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 0;
+  top: 7px;
+}
