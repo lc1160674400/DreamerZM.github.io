@@ -1,5 +1,6 @@
 // pages/index/home/home.js
 const app = getApp()
+var toast = require('../../../utils/util.js').toast;
 Page({
 
   /**
@@ -71,6 +72,7 @@ Page({
   onLoad: function (options) {
     this.checkNewVersion();
     this.getPersonList();
+    toast('warn','这是一个警告')
   },
 
   /**
@@ -103,6 +105,7 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success: function (res) {
+        console.log(res)
         //如果缓存里面没有用户信息则会跳转到授权页面
         isUser(res)
 

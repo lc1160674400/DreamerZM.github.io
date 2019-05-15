@@ -3,6 +3,7 @@
 
 const app = getApp()
 var api = require('../../utils/api.js');
+var toast = require('../../utils/api.js').toast;
 // 获取全局app变量
 
 
@@ -57,57 +58,57 @@ Page({
       wx.login({
         success(res) {
           if (res.code) {
+            //拿到临时凭证
             console.log(res.code)
             // 先根据临时凭证获取唯一openid
-            // api.get(api.url.get_openid,{js_code:res.code})
-            // .then((res)=>{
-            //   app.globalData.openid = res.data.openid
-            //   app.globalData.session_key = res.data.session_key
-            //   //获取到openid之后调用登录接口
-            //   return api.post(api.url.post_login,{
-            //     openid: app.globalData.openid,
-            //     nickName: e.detail.userInfo.nickName
-            //   })
-            // })
-            // .then((res)=>{
-            //   //登录接口时如果未注册直接调用注册接口
-            //   if(res.data.code == 500 && res.data.message=='无此用户'){
-            //     return api.post(api.url.post_register,{
-            //       openid: app.globalData.openid,
-            //       nickName: e.detail.userInfo.nickName,
-            //       avatarUrl: e.detail.userInfo.avatarUrl,
-            //       gender: e.detail.userInfo.gender == 1 ? 'boy' : 'girl',
-            //       role: 'ROLE_USER'
-            //     })
-            //   }
-            //   //如果已经注册直接登录跳转到首页
-            //   else{
-            //     app.globalData.userInfo = e.detail.userInfo
-            //     app.globalData.isLogin = true
-            //     wx.setStorage({
-            //       key: 'userInfo',
-            //       data: e.detail.userInfo,
-            //       success: () => {
-            //         wx.navigateBack({
-            //           url: '/pages/index/home/home',
-            //         })
-            //       }
-            //     })
-            //   }
-            // })
-            // .then((res)=>{
-            //   console.log('注册流程')
-            //   console.log(res)
-            // })
-            // .catch((e)=>{
-            //   console.log(e)
-            //   wx.showModal({
-            //     title: '注册失败',
-            //     content: e.message?e.message:'注册失败',
-            //   })
-            // })
+            api.get(api.url.get_openid,{js_code:res.code})
+            .then((res)=>{
+              //根据临时凭证获取用户唯一openid
+              app.globalData.openid = res.data.openid
+              app.globalData.session_key = res.data.session_key
+              //获取到openid之后调用登录接口
+              return api.post(api.url.post_login,{
+                openid: app.globalData.openid,
+                nickName: e.detail.userInfo.nickName,
+                avatarUrl: e.detail.userInfo.avatarUrl,
+                gender: e.detail.userInfo.gender == 1 ? 'boy' : 'girl',
+                role: 'ROLE_USER'
+              })
+            })
+            .then((res)=>{
+              //登录接口时如果未注册直接调用注册接口
+              if(res.data.code == 500 && res.data.message=='无此用户'){
+                return api.post(api.url.post_register,{
+                  openid: app.globalData.openid,
+                  nickName: e.detail.userInfo.nickName,
+                  avatarUrl: e.detail.userInfo.avatarUrl,
+                  gender: e.detail.userInfo.gender == 1 ? 'boy' : 'girl',
+                  role: 'ROLE_USER'
+                })
+              }
+              //如果已经注册直接登录跳转到首页
+              else{
+                app.globalData.userInfo = e.detail.userInfo
+                app.globalData.isLogin = true
+                wx.setStorage({
+                  key: 'userInfo',
+                  data: e.detail.userInfo,
+                  success: () => {
+                    wx.navigateBack({
+                      url: '/pages/index/home/home',
+                    })
+                  }
+                })
+              }
+            })
+            .then((res)=>{
+              console.log('注册流程')
+              console.log(res)
+            })
+            
           } else {
-            console.log('登录失败！' + res.errMsg)
+            //调微信官方接口没有拿到临时凭证
+            toast('error','登录失败！' + res.errMsg)
           }
         }
       })

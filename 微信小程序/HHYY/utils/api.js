@@ -1,5 +1,6 @@
 var isDev = true
 var baseUrl = 'https://admin.musilinzhijia.com'
+var toast = require('util.js').toast
 Promise.prototype.finally = function(callback){
   let P = this.constructor
   return this.then(
@@ -41,14 +42,14 @@ const post = (url, data) => {
         if (res.statusCode == 200) {
           resolve(res);
         } else {//返回错误提示信息
-          reject(res.data);
+          toast('error', res.data.message)
         }
       },
       error: function (e) {
-        reject('网络出错');
+        toast('error', e)
       }
     })
-  });
+  })
   return promise;
 }
 // 封装get请求
@@ -66,11 +67,11 @@ const get = (url, data) => {
         if (res.statusCode == 200) {
           resolve(res);
         } else {//返回错误提示信息
-          reject(res.data);
+          toast('error', res.data.message)
         }
       },
       error: function (e) {
-        reject('网络出错');
+        toast('error', e)
       }
     })
   });
