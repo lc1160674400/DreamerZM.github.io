@@ -3,20 +3,45 @@
 const app = getApp()
 var uploadImage = require('../../utils/uploadFile.js');//地址换成你自己存放文件的位置
 var util = require('../../utils/util.js');
-
+var toast = require('../../utils/util.js').toast;
+var goto = require('../../utils/util.js').goto;
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     uploadedImg:'',
+    pageObj :[
+      {
+        text:'回族身份验证',
+        target: "/pages/user/certification/certification"
+      },
+      {
+        text:'登陆记录查询',
+        target: "/pages/logs/logs"
+      },
+      {
+        text:'设置'
+      },
+      {
+        text:'意见反馈'
+      }
+    ]
   },
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  goTarget:function(e){
+    let target = e.currentTarget.dataset.target
+    if(!target || target === 'undefined'){
+      toast('tip','该功能正在开发中')
+    }
+    else{
+      goto(target)
+    }
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -54,48 +79,7 @@ Page({
       hasUserInfo: true
     })
   },
-  updateImg:function(){
-    const that = this
-    wx.chooseImage({
-      count: 9, // 默认最多一次选择9张图
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-        var tempFilePaths = res.tempFilePaths;
-        that.setData({
-          uploadedImg:tempFilePaths
-        })
-        var nowTime = util.formatTime(new Date());
-
-        //支持多图上传
-        for (var i = 0; i < res.tempFilePaths.length; i++) {
-          //显示消息提示框
-          wx.showLoading({
-            title: '上传中' + (i + 1) + '/' + res.tempFilePaths.length,
-            mask: true
-          })
-
-          //上传图片
-          //你的域名下的/cbb文件下的/当前年月日文件下的/图片.png
-          //图片路径可自行修改
-          uploadImage(res.tempFilePaths[i], 'images/' + nowTime + '/',
-            function (result) {
-              console.log("======上传成功图片地址为：", result);
-              //做你具体的业务逻辑操作
-
-              wx.hideLoading();
-            }, function (result) {
-              console.log("======上传失败======", result);
-              //做你具体的业务逻辑操作
-
-              wx.hideLoading()
-            }
-          )
-        }
-      }
-    })
-  }
+  
   
 
 })

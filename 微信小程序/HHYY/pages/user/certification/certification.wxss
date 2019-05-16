@@ -1,1 +1,64 @@
 /* pages/user/certification/certification.wxss */
+.front-img{
+  width: 100%;
+}
+.back-img{
+  width: 100%;
+  margin-top:44rpx;
+}
+.top-desc{
+  text-align: center;
+  padding: 50rpx 0;
+  color: #eee;
+}
+.help-desc{
+  text-align:center;
+  color:#eee;
+  font-size:30rpx;
+  line-height:70rpx;
+
+}
+.default-img{
+  width:70%;
+  height:100rpx;
+  padding:110rpx 0;
+  margin:0 auto;
+  display:block;
+  border:4px dashed #eee;
+  border-radius:5px;
+}
+.success-img{
+  width:232px;
+  height:142px;
+  display:block;
+  margin:0 auto;
+  border:4px dashed #eee;
+  border-radius:5px;
+}
+.allowed{
+  background-color:#449D44;
+  color: #fff;
+}
+button{
+  width:74%;
+  margin-top:38rpx;
+  height:87rpx;
+  text-align:center;
+  line-height:87rpx;
+  font-size:35rpx;
+  background-color:#fff;
+  color: #eee;
+}
+input{
+  height:2rem;
+width:89%;
+display:block;
+margin:0 auto;
+text-align:center;
+border:1px solid #eee;
+border-radius:8px;
+}
+input:nth-of-type(1){
+  margin-top: 1rem;
+  margin-bottom: 1rem
+}

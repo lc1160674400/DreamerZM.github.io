@@ -6,7 +6,7 @@
 />
 
 <!-- 已经认证身份的用户 -->
-<view wx:if="{{isCertification}}">
+<view>
   <!-- 下拉选择菜单 -->
     <w-drop-menu options="{{  options  }}" bind:onChange="handleChangePanel">
       <w-cell-group slot="filter">
@@ -43,4 +43,3 @@
     </w-cell>
 </view>
 <!-- 未认证身份的用户 -->
-<view wx:else>未认证身份的用户</view>

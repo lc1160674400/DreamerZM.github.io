@@ -1,1 +1,35 @@
 
+<view>
+  <view class='top-desc'>
+    step {{current+1}}: {{steps[current].desc}} 
+  </view>
+  <view wx:if="{{current == 0}}">
+    <view class='front-img help-desc' bindtap='updateImg' data-type='frontImg'>
+      <image wx-if="{{!frontImg}}"src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
+      <image wx-if="{{frontImg}}" class="success-img" src="{{frontImg}}" mode="cover"></image>
+      <text class='help' wx-if="{{!frontImg}}">点击上传身份证正面照片</text>
+      <text class='help' wx-if="{{frontImg}}">正面照片上传成功！</text>
+    </view>
+
+    <view class='back-img help-desc' bindtap='updateImg' data-type='backImg'>
+      <image wx-if="{{!backImg}}" src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
+      <image wx-if="{{backImg}}" class="success-img" src="{{backImg}}" mode="cover"></image>
+      <text class='help' wx-if="{{!frontImg}}">点击上传身份证背面照片</text>
+      <text class='help' wx-if="{{backImg}}">背面照片上传成功！</text>
+    </view>
+
+  </view>
+
+  <view wx:if="{{current == 1}}">
+    <view class="section">
+      <input placeholder="请输入您的真实姓名" auto-focus />
+    </view>
+    <view class="section">
+      <input type="idcard" placeholder="请输入您的真实身份证号" />
+    </view>
+  </view>
+  
+  <button bindtap='submit' class="{{backImg && frontImg? 'allowed':''}}" disabled="{{backImg && frontImg}}">{{backImg && frontImg? '下一步':'请完成填写'}}</button>
+
+
+</view>

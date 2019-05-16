@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "花好月圆",
  "usingComponents": {
     "w-tabs": "wuss-weapp/w-tabs/index",
     "w-drop-menu": "wuss-weapp/w-drop-menu/index",

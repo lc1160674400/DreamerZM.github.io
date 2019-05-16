@@ -13,6 +13,9 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+
+
+
 const BASE_TOAST = [
   {
     key:'warn',
@@ -57,8 +60,43 @@ BASE_TOAST.forEach(element=>{
   }
 })
 
+const goTo = function(target,type,time){
+  if(typeof target != 'string'){
+    Toast('error','Target Page Must Be a String Type')
+  }else{
+    if(type === 'delay'){
+      let SEC = 0
+      if (typeof time === 'number') {
+        SEC = time
+      } else if (typeof time === 'string') {
+        SEC = parseInt(time)
+      } else {
+        Toast('error', 'Function Delay only allow argument with String or Number')
+        return ''
+      }
+      setTimeout(
+        function(){
+          wx.navigateTo({
+            url: target,
+          })
+        }  
+        , SEC)
+    }else{
+      wx.navigateTo({
+        url: target,
+      })
+    }
+    
+  }
+}
+
+
+
+
+
 module.exports = {
   formatTime: formatTime,
   formatNumber: formatNumber,
-  toast:Toast
+  toast:Toast,
+  goto:goTo,
 }

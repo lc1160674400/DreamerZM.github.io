@@ -77,7 +77,7 @@ Page({
             })
             .then((res)=>{
               //登录接口时如果未注册直接调用注册接口
-              if(res.data.code == 500 && res.data.message=='无此用户'){
+              if(res.data.code == 500 && res.data.message=='用户不存在'){
                 return api.post(api.url.post_register,{
                   openid: app.globalData.openid,
                   nickName: e.detail.userInfo.nickName,
@@ -102,8 +102,10 @@ Page({
               }
             })
             .then((res)=>{
-              console.log('注册流程')
-              console.log(res)
+              console.log('注册成功')
+              wx.navigateBack({
+                url: '/pages/index/home/home',
+              })
             })
             
           } else {

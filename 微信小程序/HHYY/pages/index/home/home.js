@@ -1,6 +1,8 @@
 // pages/index/home/home.js
 const app = getApp()
 var toast = require('../../../utils/util.js').toast;
+var goto  = require('../../../utils/util.js').goto
+var delay = require('../../../utils/util.js').delay
 Page({
 
   /**
@@ -72,7 +74,6 @@ Page({
   onLoad: function (options) {
     this.checkNewVersion();
     this.getPersonList();
-    toast('warn','这是一个警告')
   },
 
   /**
@@ -255,6 +256,7 @@ Page({
     }
   },
   getUserDetail: function (event){
+    //跳转到用户详情页面
     var userid = event.target.dataset.userid
       var isCertification = wx.getStorage({
         key: 'isCertification',
@@ -265,9 +267,9 @@ Page({
               url: '/pages/user/detail/detail',
             })
           } else {
-            wx.navigateTo({
-              url: '/pages/user/certification/certification',
-            })
+            toast('tip', '未认证回民身份，暂无权限查看用户详情，2秒钟之后自动跳转到回民身份认证页面')
+            goto('/pages/user/certification/certification','delay',2000)
+            
           }
         }
       })

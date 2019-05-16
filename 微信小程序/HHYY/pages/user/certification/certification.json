@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "navigationBarTitleText": "身份认证",
+  "w-steps": "wuss-weapp/w-steps/index"
 }
