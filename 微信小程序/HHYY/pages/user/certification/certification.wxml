@@ -4,32 +4,31 @@
     step {{current+1}}: {{steps[current].desc}} 
   </view>
   <view wx:if="{{current == 0}}">
-    <view class='front-img help-desc' bindtap='updateImg' data-type='frontImg'>
-      <image wx-if="{{!frontImg}}"src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
-      <image wx-if="{{frontImg}}" class="success-img" src="{{frontImg}}" mode="cover"></image>
-      <text class='help' wx-if="{{!frontImg}}">点击上传身份证正面照片</text>
-      <text class='help' wx-if="{{frontImg}}">正面照片上传成功！</text>
+    <view class='front-img help-desc' bindtap='updateImg' data-type='frontimg'>
+      <image wx-if="{{!frontimg.isValid}}"src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
+      <image wx-if="{{frontimg.isValid}}" class="success-img" src="{{frontimg.localurl}}" mode="cover"></image>
+      <text class='help' wx-if="{{!frontimg.isValid}}">点击上传身份证正面照片</text>
+      <text class='help' wx-if="{{frontimg.isValid}}">正面照片上传成功！</text>
     </view>
 
-    <view class='back-img help-desc' bindtap='updateImg' data-type='backImg'>
-      <image wx-if="{{!backImg}}" src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
-      <image wx-if="{{backImg}}" class="success-img" src="{{backImg}}" mode="cover"></image>
-      <text class='help' wx-if="{{!frontImg}}">点击上传身份证背面照片</text>
-      <text class='help' wx-if="{{backImg}}">背面照片上传成功！</text>
+    <view class='back-img help-desc' bindtap='updateImg' data-type='backimg'>
+      <image wx-if="{{!backimg.isValid}}" src='/static/imgs/upload.png' mode='aspectFit' class='default-img'></image>
+      <image wx-if="{{backimg.isValid}}" class="success-img" src="{{backimg.localurl}}" mode="cover"></image>
+      <text class='help' wx-if="{{!backimg.isValid}}">点击上传身份证背面照片</text>
+      <text class='help' wx-if="{{backimg.isValid}}">背面照片上传成功！</text>
     </view>
 
   </view>
 
   <view wx:if="{{current == 1}}">
     <view class="section">
-      <input placeholder="请输入您的真实姓名" auto-focus />
+      <input placeholder="请输入您的真实姓名" auto-focus bindblur="docheck" id="name"/>
     </view>
     <view class="section">
-      <input type="idcard" placeholder="请输入您的真实身份证号" />
+      <input type="idcard" placeholder="请输入您的真实身份证号" bindblur="docheck" id="idcard"/>
     </view>
   </view>
   
-  <button bindtap='submit' class="{{backImg && frontImg? 'allowed':''}}" disabled="{{backImg && frontImg}}">{{backImg && frontImg? '下一步':'请完成填写'}}</button>
-
+  <button bindtap='submit' class="{{isReady? 'allowed':''}}" disabled="{{!isReady}}">{{isReady? '下一步':'请完成填写'}}</button>
 
 </view>

@@ -13,7 +13,24 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-
+const FORM_VALID = function(type,value){
+  switch(type){
+    case 'default':
+      this.isValid = value.length != 0 && value != undefined && value != ''? true : false
+      this.errMsg = this.isValid?'':'请输入有效内容'
+      break;
+    case 'name':
+      var reg = /^[\u4e00-\u9fa5]{2,4}$/ig;
+      this.isValid = reg.test(value)
+      this.errMsg = this.isValid ? '' : '请输入2-4位的有效姓名'
+      break;
+    case 'idcard':
+      var reg = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+      this.isValid = reg.test(value)
+      this.errMsg = this.isValid ? '' : '请输入正确的身份证信息'
+      break;
+  }
+}
 
 
 const BASE_TOAST = [
@@ -99,4 +116,6 @@ module.exports = {
   formatNumber: formatNumber,
   toast:Toast,
   goto:goTo,
+  formValid: FORM_VALID,
+
 }

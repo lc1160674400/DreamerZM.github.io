@@ -1,5 +1,6 @@
 // pages/user/certification/certification.js
 var util = require('../../..//utils/util.js')
+var formValid = require('../../..//utils/util.js').formValid
 var toast = util.toast
 var uploadImage = require('../../../utils/uploadFile.js');
 Page({
@@ -8,7 +9,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-    current:1,
+    current:0,
+    name:{
+      isValid:false,
+      value:''
+    },
+    idcard:{
+      isValid:false,
+      value:''
+    },
+    frontimg:{
+      isValid:false,
+      value:'',
+      localurl:''
+    },
+    backimg: {
+      isValid: false,
+      value: '',
+      localurl:''
+    },
     steps:[
       {
         title:'标题1',
@@ -16,7 +35,8 @@ Page({
       }, {
         title: '标题2',
         desc: '填写身份信息'
-      }]
+      }],
+    isReady:false
   },
   updateImg: function (e) {
     const type = e.currentTarget.dataset.type
@@ -28,13 +48,13 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
-        var tempObj = {}
-        tempObj[type] = tempFilePaths
-        that.setData(tempObj)
-        console.log(that.data[type])
+        
         var nowTime = util.formatTime(new Date());
-
-        //支持多图上传
+        if(tempFilePaths.length>1){
+          toast('error','最多支持同时上传一张照片')
+          return
+        }
+        //不支持多图上传
         for (var i = 0; i < res.tempFilePaths.length; i++) {
           //显示消息提示框
           wx.showLoading({
@@ -48,30 +68,77 @@ Page({
           // console.log(res.tempFilePaths[i], 'images/' + nowTime + '/')
           uploadImage(res.tempFilePaths[i], 'attest/',
             function (result) {
-              toast('tip','上传成功')
+              
               console.log("======上传成功图片地址为：", result);
-              //做你具体的业务逻辑操作
-
+              //设置微信变量
+              var tempObj = {}
+              tempObj[type]={}
+              tempObj[type].isValid = true
+              tempObj[type].value = result
+              tempObj[type].localurl = tempFilePaths[0]
+              that.setData(tempObj)
+              //隐藏loading动画
               wx.hideLoading();
+              //弹框提示成功
+              toast('tip', '上传成功')
+              if(that.data.frontimg.isValid && that.data.backimg.isValid){
+                that.setData({
+                  isReady:true
+                })
+              }
+
+
             }, function (result) {
               console.log("======上传失败======", result);
               //做你具体的业务逻辑操作
 
               wx.hideLoading()
+              toast('error', '上传图片失败')
             }
           )
         }
       }
     })
   },
+  docheck:function(e){
+    let type = e.target.id ? e.target.id:'default'
+    let value = e.detail.value
+    let validObj = new formValid(type,value)
+    if(!validObj.isValid){
+      toast('warn',validObj.errMsg)
+      var tempObj = {}
+      tempObj[type] = {}
+      tempObj[type].isValid = false
+      this.setData(tempObj)
+    }else{
+      var tempObj = {}
+      tempObj[type] = {}
+      tempObj[type].isValid = true
+      tempObj[type].value = value
+      this.setData(tempObj)
+    }
+
+    //设置按钮的可点击状态
+    if(this.data.name.isValid && this.data.idcard.isValid){
+      this.setData({
+        isReady:true
+      })
+    }else{
+      this.setData({
+        isReady: false
+      })
+    }
+  },
 
   submit:function(){
     if(this.data.current == 0){
       this.setData({
-        current:1
+        current:1,
+        isReady:false
       })
     }else if(this.data.current == 1){
       //如果已经是第二步的话，直接提交表单
+      console.log(1111)
     }
     
   },
