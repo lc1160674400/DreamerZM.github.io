@@ -3,13 +3,19 @@ var util = require('../../..//utils/util.js')
 var formValid = require('../../..//utils/util.js').formValid
 var toast = util.toast
 var uploadImage = require('../../../utils/uploadFile.js');
+var api = require('../../../utils/api.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    token:'',
     current:0,
+    tel:{
+      isValid: false,
+      value: ''
+    },
     name:{
       isValid:false,
       value:''
@@ -89,9 +95,6 @@ Page({
 
 
             }, function (result) {
-              console.log("======上传失败======", result);
-              //做你具体的业务逻辑操作
-
               wx.hideLoading()
               toast('error', '上传图片失败')
             }
@@ -119,7 +122,7 @@ Page({
     }
 
     //设置按钮的可点击状态
-    if(this.data.name.isValid && this.data.idcard.isValid){
+    if(this.data.name.isValid && this.data.idcard.isValid && this.data.tel.isValid){
       this.setData({
         isReady:true
       })
@@ -138,7 +141,19 @@ Page({
       })
     }else if(this.data.current == 1){
       //如果已经是第二步的话，直接提交表单
-      console.log(1111)
+      // console.log(this.data.frontimg, this.data.backimg, this.data.name, this.data.idcard,this.data.tel)
+      let paramObj = {
+        'Authorization': 'Bearer ' + this.data.token,
+        'realName':this.data.name.value,
+        'mobile':this.data.tel.value,
+        'identityNumber': this.data.idcard.value,
+        'identityImagePositive':this.data.frontimg.value,
+        'identityImageRebel':this.data.backimg.value
+      }
+      console.log(paramObj)
+      api.post(api.url.post_attest,paramObj).then(res=>{
+        console.log(res)
+      })
     }
     
   },
@@ -154,7 +169,12 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log(wx.getStorageSync('token'))
+    console.log(this.data.token)
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
+    console.log(this.data.token)
   },
 
   /**

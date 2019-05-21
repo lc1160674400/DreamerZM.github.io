@@ -9,9 +9,10 @@ Promise.prototype.finally = function(callback){
   )
 }
 var url = {
-  post_register: `${baseUrl}/user/register`,
   get_openid: `${baseUrl}/user/openid`,
-  post_login: `${baseUrl}/user/login`
+  post_register: `${baseUrl}/user/register`,
+  post_login: `${baseUrl}/user/login`,
+  post_attest: `${baseUrl}/attest`,
 }
 const wxPromisify = fn =>{
   return function(obj={}){

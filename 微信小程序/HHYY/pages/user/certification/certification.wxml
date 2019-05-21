@@ -24,8 +24,13 @@
     <view class="section">
       <input placeholder="请输入您的真实姓名" auto-focus bindblur="docheck" id="name"/>
     </view>
+
     <view class="section">
       <input type="idcard" placeholder="请输入您的真实身份证号" bindblur="docheck" id="idcard"/>
+    </view>
+
+    <view class="section">
+      <input type="tel" placeholder="请输入您手机号码" bindblur="docheck" id="tel"/>
     </view>
   </view>
   

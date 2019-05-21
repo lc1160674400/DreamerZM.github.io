@@ -8,7 +8,7 @@
 <!-- 已经认证身份的用户 -->
 <view>
   <!-- 下拉选择菜单 -->
-    <w-drop-menu options="{{  options  }}" bind:onChange="handleChangePanel">
+    <!-- <w-drop-menu options="{{  options  }}" bind:onChange="handleChangePanel">
       <w-cell-group slot="filter">
         <w-radio color="#fc9d9a" options="{{  radioOptions  }}" />
         <w-checkbox color="#fc9d9a" icon-type="box" options="{{ checkboxOptions }}" />
@@ -17,7 +17,7 @@
         </w-cell>
         <w-button flat full type="warn" >确定</w-button>
       </w-cell-group>
-    </w-drop-menu> 
+    </w-drop-menu>  -->
     <!-- 列表菜单 -->
   <w-cell
     isLink

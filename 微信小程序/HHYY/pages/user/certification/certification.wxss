@@ -32,7 +32,7 @@
   height:142px;
   display:block;
   margin:0 auto;
-  border:4px dashed #eee;
+  border:4px dashed #5AB770;
   border-radius:5px;
 }
 .allowed{

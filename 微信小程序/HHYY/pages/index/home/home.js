@@ -106,7 +106,6 @@ Page({
     wx.getStorage({
       key: 'userInfo',
       success: function (res) {
-        console.log(res)
         //如果缓存里面没有用户信息则会跳转到授权页面
         isUser(res)
 

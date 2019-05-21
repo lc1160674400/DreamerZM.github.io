@@ -59,7 +59,6 @@ Page({
         success(res) {
           if (res.code) {
             //拿到临时凭证
-            console.log(res.code)
             // 先根据临时凭证获取唯一openid
             api.get(api.url.get_openid,{js_code:res.code})
             .then((res)=>{
@@ -84,12 +83,19 @@ Page({
                   avatarUrl: e.detail.userInfo.avatarUrl,
                   gender: e.detail.userInfo.gender == 1 ? 'boy' : 'girl',
                   role: 'ROLE_USER'
+                }).then((res) => {
+                  console.log('注册成功')
+                  wx.navigateBack({
+                    url: '/pages/index/home/home',
+                  })
                 })
               }
               //如果已经注册直接登录跳转到首页
               else{
                 app.globalData.userInfo = e.detail.userInfo
                 app.globalData.isLogin = true
+                console.log(res.data.data.token)
+                wx.setStorageSync('token', res.data.data.token)
                 wx.setStorage({
                   key: 'userInfo',
                   data: e.detail.userInfo,
@@ -101,12 +107,7 @@ Page({
                 })
               }
             })
-            .then((res)=>{
-              console.log('注册成功')
-              wx.navigateBack({
-                url: '/pages/index/home/home',
-              })
-            })
+            
             
           } else {
             //调微信官方接口没有拿到临时凭证
