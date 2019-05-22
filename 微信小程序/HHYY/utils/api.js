@@ -10,6 +10,7 @@ Promise.prototype.finally = function(callback){
 }
 var url = {
   get_openid: `${baseUrl}/user/openid`,
+  get_attestStatus: `${baseUrl}/attest`,
   post_register: `${baseUrl}/user/register`,
   post_login: `${baseUrl}/user/login`,
   post_attest: `${baseUrl}/attest`,
@@ -28,7 +29,7 @@ const wxPromisify = fn =>{
   }
 }
 // 封装post请求
-const post = (url, data) => {
+const post = (url, data,token) => {
   var promise = new Promise((resolve, reject) => {
     //网络请求
     wx.request({
@@ -37,7 +38,7 @@ const post = (url, data) => {
       method: 'POST',
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'token': wx.getStorageSync('token')
+        'Authorization': token ? 'Bearer ' + token:''
       },
       success: function (res) {//服务器返回数据
         if (res.statusCode == 200) {
@@ -54,15 +55,16 @@ const post = (url, data) => {
   return promise;
 }
 // 封装get请求
-const get = (url, data) => {
+const get = (url, data, token) => {
   var promise = new Promise((resolve, reject) => {
     //网络请求
     wx.request({
       url: url,
       data: data,
+
       header: {
-        'content-type': 'application/json',
-        'token': wx.getStorageSync('token')
+        'content-type': 'application/x-www-form-urlencoded',
+        'Authorization': token ? 'Bearer ' + token : ''
       },
       success: function (res) {//服务器返回数据
         if (res.statusCode == 200) {

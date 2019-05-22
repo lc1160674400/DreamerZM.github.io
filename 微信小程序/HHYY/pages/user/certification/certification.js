@@ -1,9 +1,10 @@
 // pages/user/certification/certification.js
 var util = require('../../..//utils/util.js')
 var formValid = require('../../..//utils/util.js').formValid
+var goto = require('../../..//utils/util.js').goto
 var toast = util.toast
 var uploadImage = require('../../../utils/uploadFile.js');
-var api = require('../../../utils/api.js')
+var api = require('../../../utils/api.js');
 Page({
 
   /**
@@ -143,7 +144,6 @@ Page({
       //如果已经是第二步的话，直接提交表单
       // console.log(this.data.frontimg, this.data.backimg, this.data.name, this.data.idcard,this.data.tel)
       let paramObj = {
-        'Authorization': 'Bearer ' + this.data.token,
         'realName':this.data.name.value,
         'mobile':this.data.tel.value,
         'identityNumber': this.data.idcard.value,
@@ -151,8 +151,17 @@ Page({
         'identityImageRebel':this.data.backimg.value
       }
       console.log(paramObj)
-      api.post(api.url.post_attest,paramObj).then(res=>{
-        console.log(res)
+      api.post(api.url.post_attest, paramObj, this.data.token).then((res)=>{
+        
+        if(res.data.code == 200){
+          toast('tip','提交成功，请及时联系管理员进行审')
+          setTimeout(()=>{wx.navigateBack({
+            delta: 1
+          })},2000)
+          
+        }else{
+          toast('error', res.data.message)
+        }
       })
     }
     
@@ -169,12 +178,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(wx.getStorageSync('token'))
-    console.log(this.data.token)
     this.setData({
       token: wx.getStorageSync('token')
     })
-    console.log(this.data.token)
   },
 
   /**

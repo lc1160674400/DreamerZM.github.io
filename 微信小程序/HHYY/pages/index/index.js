@@ -5,8 +5,11 @@ var uploadImage = require('../../utils/uploadFile.js');//地址换成你自己�
 var util = require('../../utils/util.js');
 var toast = require('../../utils/util.js').toast;
 var goto = require('../../utils/util.js').goto;
+var api = require('../../utils/api.js')
 Page({
   data: {
+    isCertification:false,
+    token:'',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -34,6 +37,10 @@ Page({
       url: '../logs/logs'
     })
   },
+  showToast: function (e) {
+    let content = e.currentTarget.dataset.content
+    toast('tip', content)
+  },
   goTarget:function(e){
     let target = e.currentTarget.dataset.target
     if(!target || target === 'undefined'){
@@ -44,6 +51,11 @@ Page({
     }
   },
   onLoad: function () {
+    //设置token
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -72,14 +84,43 @@ Page({
     }
   },
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
+  getAttestStatus:function(){
+    api.get(api.url.get_attestStatus, {}, this.data.token).then(res=>{
+      if(res.data.data.length===0){
+        wx.setStorageSync('isCertification', 0)
+        this.setData({
+          'isCertification':0
+        })
+      }else{
+        let status = 0
+        switch(res.data.data.status){
+          case "REVIEWING":
+            status = 1;
+            break;
+          case "PASS":
+            status = 2;
+            break;
+          case "NOTPASS":
+            status = 3;
+            break;
+        }
+        this.setData({
+          'isCertification':status
+        })
+        wx.setStorageSync('isCertification', 0)
+      }
+    })
+  },
   
+  onShow:function(){
+    this.getAttestStatus()
+  } 
   
 
 })

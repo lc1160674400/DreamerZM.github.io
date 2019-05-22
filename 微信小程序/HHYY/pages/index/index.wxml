@@ -11,6 +11,18 @@
     </block>
   </view>
   <view class="usermotto">
-    <view wx:for="{{pageObj}}" class='motto-item' data-target = "{{item.target}}" bindtap='goTarget'>{{item.text}}</view>
+    <!-- <view wx:for="{{pageObj}}" class='motto-item' data-target = "{{item.target}}" bindtap='goTarget'>{{item.text}}</view> -->
+    <view class='motto-item' data-target = "{{pageObj[0].target}}" bindtap='goTarget' wx:if="{{isCertification == 0}}">{{pageObj[0].text}}</view>
+    <view wx:if="{{isCertification == 1}}" class='motto-item' data-content='已提交审核，请及时联系管理员进行处理' bindtap='showToast'>
+      <image src='/static/imgs/smile.png' class='icon-img' ></image>
+      已提交认证
+    </view>
+    <view wx:if="{{isCertification == 2}}" class='motto-item' data-content='审核已经通过，请勿重复提交' bindtap='showToast'>
+      <image src='/static/imgs/success.png' class='icon-img' ></image>
+      认证已通过
+    </view>
+    <view class='motto-item' data-target = "{{pageObj[1].target}}" bindtap='goTarget'>{{pageObj[1].text}}</view>
+    <view class='motto-item' data-target = "{{pageObj[2].target}}" bindtap='goTarget'>{{pageObj[2].text}}</view>
+    <view class='motto-item' data-target = "{{pageObj[3].target}}" bindtap='goTarget'>{{pageObj[3].text}}</view>
   </view>
 </view>
