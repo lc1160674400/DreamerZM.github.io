@@ -1,2 +1,0 @@
-<import src="./label.vue.wxml" />
-    <template is="01b202fa" data="{{ ...$root['0'], $root }}"/>

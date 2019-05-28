@@ -1,1 +1,0 @@
-<import src="/components/uParse/src/wxParse.vue.wxml" /><template name="47cc0358"><view class="_view 47cc0358 uni-padding-wrap"><template bindpreview="handleProxy" bindnavigate="handleProxy" data-eventid="{{'47cc0358-0'}}" data-comkey="{{$k}}" data="{{...$root['0'], ...$root[$kk+'47cc0358-0'],$root}}" is="0930bc36"></template></view></template>

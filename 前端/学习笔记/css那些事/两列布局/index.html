@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #header,#footer{
+            width: 960px;
+            height: 30px;
+            background-color: aqua
+        }
+        #container{
+            width: 960px;
+            margin: 10px 0;
+            overflow: hidden;
+            position: relative;
+            background: url('./2.png') repeat-y;
+        }
+        .mainBox{
+            color: #fff;
+            background-color: #333333;
+            width: auto;
+            margin-right: 200px;
+        }
+        .sideBox{
+            position: absolute;
+            float: right;
+            top: 0;
+            right: 0;
+            width: 200px;
+            color: #fff;
+            background-color: aliceblue;
+            /* padding-bottom: 9999px; */
+            /* margin-bottom: -9999px; */
+            
+        }
+        /* #container::after{
+            display: block;
+            visibility: hidden;
+            font-size: 0px;
+            line-height: 0px;
+            clear: both;
+            content: '';
+        } */
+
+    </style>
+</head>
+<body>
+    <div id="header">这里是头部</div>
+    <div id="container">
+        <div class="mainBox">
+            <div class="content">ssssss</div>
+        </div>
+        <div class="subMainBox">次要内容区域</div>
+        <div class="sideBox">侧边栏</div>
+    </div>
+    <div id="footer">底部信息</div>
+</body>
+</html>

@@ -1,2 +1,0 @@
-<import src="./action-sheet.vue.wxml" />
-    <template is="6d5c5b56" data="{{ ...$root['0'], $root }}"/>
