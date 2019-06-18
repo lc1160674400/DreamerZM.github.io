@@ -1,0 +1,19 @@
+{
+  "name": "webpack",
+  "version": "1.0.0",
+  "description": "构建是做这件事情，把源代码转换成发布到闲上的可执行的JavaScript，css，html代码，包括如下内容",
+  "main": "a.js",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "webpack": "^4.32.2"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

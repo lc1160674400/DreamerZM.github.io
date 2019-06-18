@@ -11,7 +11,8 @@
     "pages/login/login",
     "pages/logs/logs",
     "pages/user/certification/certification",
-    "pages/user/detail/detail"
+    "pages/user/detail/detail",
+    "pages/user/marriage/upload"
   ],
   "window": {
     "backgroundTextStyle": "light",

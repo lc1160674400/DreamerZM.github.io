@@ -20,6 +20,10 @@ Page({
         target: "/pages/user/certification/certification"
       },
       {
+        text: '上传征婚信息',
+        target: "/pages/user/marriage/upload"
+      },
+      {
         text:'登陆记录查询',
         target: "/pages/logs/logs"
       },

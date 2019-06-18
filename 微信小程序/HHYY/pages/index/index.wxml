@@ -24,5 +24,6 @@
     <view class='motto-item' data-target = "{{pageObj[1].target}}" bindtap='goTarget'>{{pageObj[1].text}}</view>
     <view class='motto-item' data-target = "{{pageObj[2].target}}" bindtap='goTarget'>{{pageObj[2].text}}</view>
     <view class='motto-item' data-target = "{{pageObj[3].target}}" bindtap='goTarget'>{{pageObj[3].text}}</view>
+    <view class='motto-item' data-target = "{{pageObj[4].target}}" bindtap='goTarget'>{{pageObj[4].text}}</view>
   </view>
 </view>
