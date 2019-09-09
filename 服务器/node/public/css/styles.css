@@ -1,0 +1,191 @@
+/* 移除边缘 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 按键设置 */
+/*.chat button {*/
+  /*padding: 10px;*/
+  /*background: yellowgreen;*/
+/*}*/
+/*.chat button:disabled {*/
+  /*background: black;*/
+/*}*/
+
+/* 聊天界面 */
+.chat_main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 100vh;
+  width: 100%;
+}
+
+/* 聊天信息 */
+.chat_messages {
+  flex-grow: 1;
+  /*overflow-y: scroll;*/
+  padding: 0.2rem;
+  margin-bottom:1rem;
+}
+.chat_messages li{
+  list-style: none;
+  display: flex;
+}
+.chat_messages li img{
+  width:0.88rem;
+  height:0.88rem;
+  margin-right:0.2rem;
+}
+.chat_messages li .triangle{
+  width:0;
+  height:0;
+  border-right:0.16rem solid #ffffff;
+  border-top:0.15rem solid transparent;
+  border-bottom:0.15rem solid transparent;
+  margin-top:0.29rem;
+}
+.chat_messages .message_body{
+  max-width:5.76rem;
+  font-size:0.3rem;
+  color:#2b2b2b;
+  background: #ffffff;
+  border-radius: 4px;
+  word-break: break-all;
+  box-sizing: border-box;
+  padding:0.2rem;
+}
+/* 底部设置 */
+.chat_footer {
+  /*background: gray;*/
+  /*padding: 10px;*/
+  /*display: flex;*/
+  /*flex-shrink: 0;*/
+  /*flex-direction: column;*/
+  position:fixed;
+  bottom:0;
+  background: #ffffff;
+  width:100%;
+  height:1.2rem;
+  box-sizing: border-box;
+  padding:0.2rem 0.4rem;
+}
+.chat_footer div {
+  flex-grow: 1;
+  display: flex;
+  margin-bottom: 10px;
+}
+.chat_footer input {
+  border: none;
+  background: #f5f5f5;
+  outline: none;
+  height:0.8rem;
+  width:4rem;
+  border-radius: 4px;
+  padding-left:0.3rem;
+  box-sizing: border-box;
+  font-size:0.3rem;
+  /*padding: 10px;*/
+  /*flex-grow: 1;*/
+}
+.chat_footer button{
+  background: #1d95f6;
+  border-radius:4px;
+  color:#ffffff;
+  border:none;
+  width:1rem;
+  margin-left:0.28rem;
+  font-size:0.3rem;
+  outline:none;
+}
+
+/* 分隔聊天内容 */
+.message {
+  margin-bottom: 0.4rem;
+}
+
+.centered-formform{
+  height: 100vh;
+  width: 100%;
+  position:relative;
+}
+.bg{
+  width:100%;
+  z-index:-1;
+  position:absolute;
+}
+.title{
+  padding-top:4rem;
+}
+.title p {
+  font-size:0.48rem;
+  color:#ca5134;
+  text-align: center;
+  margin-bottom:2rem;
+}
+.join{
+  background-color: #f89b3d;
+  font-size:0.48rem;
+  color:#ffffff;
+  width:3.64rem;
+  height:0.9rem;
+  line-height: 0.9rem;
+  border-radius:12px;
+  display: block;
+  text-align: center;
+  margin:0 auto;
+  outline: none;
+  border:0;
+}
+.sex{
+  padding:0 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom:2rem;
+}
+label{
+  display:inline-block;
+  text-align:center;
+}
+label input{
+  display: block;
+  opacity: 0;
+  border-radius:50%;
+}
+.centered-formform label img{
+  width: 0.92rem;
+  height:0.92rem;
+  display: block;
+}
+label span{
+  display: block;
+  font-size:0.36rem;
+  line-height:0.7rem;
+}
+.chat{
+  background-color:#f5f5f5;
+  overflow-y: scroll;
+}
+.welcome{
+  margin:0.2rem auto 0.32rem;
+  background-color:#ffffff;
+  border-radius:4px;
+}
+.welcome img{
+  width:6.72rem;
+  border-radius:4px 4px 0 0;
+}
+.welcome>div{
+  width:6.72rem;
+  padding:0 0.3rem 0.3rem;
+  box-sizing: border-box;
+  font-size:0.26rem;
+  color:#616161;
+}
+.welcome p{
+  font-size:0.38rem;
+  color:#2b2b2b;
+  font-weight:bold;
+  line-height: 0.7rem;
+}

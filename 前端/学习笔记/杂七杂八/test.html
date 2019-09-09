@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>这是一个作业</title>
+</head>
+<body>
+    <form id="login">
+        <label for="username">用户名：</label>
+        <input type="text" id="username">
+        <br>
+        <label for="passwd">密码：</label>
+        <input type="password" id="passwd">
+        <br>
+        <span>性别：</span>
+        <label for="male">男</label>
+        <input type="radio" name="sex" id="male">
+        <label for="famale">女</label>
+        <input type="radio" name="sex" id = 'famale'>
+        <br>
+        <label for="photo">头像:</label>
+        <input type="file" id="photo">
+        <br>
+        <span>住址：</span>
+        <select name="province" id="provinces">
+            <option value="guangdong">广东</option>
+            <option value="hunan">湖南</option>
+        </select>
+        <label for="provinces">省</label>
+        <select name="city" id="citys">
+            <option value="shenzhen">深圳</option>
+            <option value="yongzhou">永州</option>
+        </select>
+        <label for="citys">市</label>
+        <br>
+        <span>爱好：</span>
+        <input type="checkbox" id="basketball">
+        <label for="basketball">篮球</label>
+        <input type="checkbox" id="football">
+        <label for="football">足球</label>
+        <input type="checkbox" id="read">
+        <label for="read">看书</label>
+        <br>
+        <label for="note">备注：</label>
+        <textarea name="noteArea" id="note" cols="30" rows="2"></textarea>
+        <br>
+        <button id="sub-btn">提交</button>
+        <button type="reset">重置</button>
+    </form>
+    <script>
+        var btn = document.getElementById('sub-btn')
+        var username = document.getElementById('username');
+        var passwd = document.getElementById('passwd');
+        username.value = '自动姓名';
+        passwd.value = '自动密码';
+        btn.onclick = function(e){
+            alert(username.value + ',' + passwd.value);
+        }
+        btn.click()
+    </script>
+</body>
+</html>

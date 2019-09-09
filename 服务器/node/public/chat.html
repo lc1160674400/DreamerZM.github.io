@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./css/styles.css">
+        <title>配对匿名聊天室</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    </head>
+    <body class="chat">
+        <div class="chat_main">
+            <div class="welcome">
+                <img src="./images/Enter Image.png" alt="">
+                <div>
+                    <p>欢迎来到番薯瞎扯淡</p>
+                    <div>Hi 这个世界人海太大，也许冥冥之中我们就已决定何时相遇。</div>
+                    <div>你准备好了吗？</div>
+                </div>
+            </div>
+            <ol id="messages" class="chat_messages"></ol>
+
+            <div class="chat_footer">
+                <div>
+                    <input name="message" type="text" placeholder="发送消息" autofocus autocomplete="off"/>
+                    <button id="send-message">发送</button>
+                    <button id="change-person">换人</button>
+                    <!--<button id="leave">断开</button>-->
+                    <!-- <button id="send-location">发送位置</button> -->
+                </div>
+            </div>
+        </div>
+
+        <!--<script id="message-template" type="text/template">-->
+            <!--<li class="message">-->
+                <!--<div class="message_title">-->
+                    <!--<h4>{{from}}</h4>-->
+                    <!--<span>{{createdAt}}</span>-->
+                <!--</div>-->
+                <!--<div class="message_body">-->
+                    <!--<p>{{text}}</p>-->
+                <!--</div>-->
+            <!--</li>-->
+        <!--</script>-->
+
+        <script id="message-template" type="text/template">
+            <li class="message">
+                <img src="{{head}}" alt="" class="head">
+                <div class="triangle"></div>
+                <div class="message_body">{{text}}</div>
+            </li>
+        </script>
+
+        <script id="location-message-template" type="text/template">
+            <li class="message">
+                <div class="message_title">
+                    <h4>{{from}}</h4>
+                    <span>{{createdAt}}</span>
+                </div>
+                <div class="message_body">
+                    <p>
+                        <a href="{{url}}" target="_blank">我在这里~</a>
+                    </p>
+                </div>
+            </li>
+        </script>
+
+        <script src="/js/global.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/lib/jquery-3.2.1.min.js"></script>
+        <script src="/js/lib/moment.js"></script>
+        <script src="/js/lib/mustache.js"></script>
+        <script src="/js/lib/deparam.js"></script>
+        <script src="/js/chat.js"></script>
+
+    </body>
+</html>
