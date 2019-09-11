@@ -51,11 +51,11 @@ export default {
       bottomDiv.style.left = '-130%'
     }, 1000)
 
-    setInterval(() => {
-      this.titleRotate = this.titleRotate !== 360 ? this.titleRotate + 90 : 0
-      let titleDiv = document.getElementById('title')
-      titleDiv.style.transform = `rotate(${this.titleRotate}deg)`
-    }, 10000)
+    // setInterval(() => {
+    //   this.titleRotate = this.titleRotate !== 360 ? this.titleRotate + 90 : 0
+    //   let titleDiv = document.getElementById('title')
+    //   titleDiv.style.transform = `rotate(${this.titleRotate}deg)`
+    // }, 10000)
   }
 }
 </script>
@@ -70,7 +70,7 @@ export default {
     position: relative;
 }
 #up-block{
-    background-color: @darkPrimaryColor;
+    background: linear-gradient(@darkPrimaryColor, @dividerColor);
     position: absolute;
     top: 0;
     left: -350%;
@@ -84,7 +84,7 @@ export default {
 }
 
 #bottom-block{
-    background-color: @darkPrimaryColor;
+    background: linear-gradient(@dividerColor, @darkPrimaryColor);
     position: absolute;
     top: -10%;
     left: 10%;
@@ -106,8 +106,10 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    margin-top: 25%;
     transition: transform 2s;
+}
+#title:hover{
+    transform: rotate(360deg);
 }
 #header{
     position: absolute;
