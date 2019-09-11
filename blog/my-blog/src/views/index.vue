@@ -6,7 +6,10 @@
             ZMER
         </div>
         <div id="header">
-            <div v-for="(item,index) in headerList" :key = index><span>{{item.title}}</span></div>
+            <div v-for="(item,index) in headerList" :key = index><span class="underline-text">{{item.title}}</span></div>
+        </div>
+        <div id="author" class="underline-text">
+            ming.zhu @ 77
         </div>
     </div>
 </template>
@@ -70,7 +73,7 @@ export default {
     position: relative;
 }
 #up-block{
-    background: linear-gradient(@darkPrimaryColor, @dividerColor);
+    background: linear-gradient(@lightPrimaryColor, @dividerColor);
     position: absolute;
     top: 0;
     left: -350%;
@@ -84,7 +87,7 @@ export default {
 }
 
 #bottom-block{
-    background: linear-gradient(@dividerColor, @darkPrimaryColor);
+    background: linear-gradient(@dividerColor, @lightPrimaryColor);
     position: absolute;
     top: -10%;
     left: 10%;
@@ -102,19 +105,24 @@ export default {
     font-size: 376px;
     color: @textPrimaryColor;
     position: absolute;
+    font-weight: 200;
     left: 0;
     right: 0;
     top: 0;
-    bottom: 0;
     transition: transform 2s;
 }
 #title:hover{
     transform: rotate(360deg);
 }
 #header{
+    text-align: left;
     position: absolute;
-    top: 50px;
-    left: 50px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin-left: 50px;
+    margin-top: 50px;
+    width: 300px;
 }
 #header span{
     font-family: fantasy;
@@ -130,11 +138,18 @@ export default {
     -webkit-transition: margin 2s; /* Safari 和 Chrome */
     -o-transition: margin 2s; /* Opera */
 }
-#header span:hover{
-    color: @textPrimaryColor;
-    font-size: 30px;
+.underline-text:hover,#header span:hover{
     margin: 16px;
     display: inline-block;
-    text-decoration: underline
+    text-decoration: underline;
+    transition: margin 1s;
+}
+#author{
+    font-family: fantasy;
+    position: absolute;
+    color: #FFFFFF;
+    bottom: 25px;
+    right: 37px;
+    font-size: 22px;
 }
 </style>
