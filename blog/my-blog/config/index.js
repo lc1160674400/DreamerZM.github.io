@@ -9,7 +9,8 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: './',
+    // 判断如果是开发环境就是'/' 如果是打包环境就是'./'
+    assetsPublicPath: process.env.npm_lifecycle_event === 'dev' ? '/' : './',
     proxyTable: {},
 
     // Various Dev Server settings
