@@ -90,7 +90,6 @@ export default {
     left: 10%;
     right: -18%;
     bottom: -37%;
-    -webkit-transform: rotate(24deg);
     transform: rotate(-24deg);
     margin-top: 70%;
     transition: margin-top 2s;
