@@ -73,7 +73,7 @@ export default {
     background-color: @darkPrimaryColor;
     position: absolute;
     top: 0;
-    left: -350%;    //130
+    left: -350%;
     right: 0;
     bottom: 0;
     transform: rotate(-24deg);
@@ -88,11 +88,11 @@ export default {
     position: absolute;
     top: -10%;
     left: 10%;
-    right: -18%; //-18
+    right: -18%;
     bottom: -37%;
     -webkit-transform: rotate(24deg);
     transform: rotate(-24deg);
-    margin-top: 70%;  //34%
+    margin-top: 70%;
     transition: margin-top 2s;
     -moz-transition: margin-top 2s; /* Firefox 4 */
     -webkit-transition: margin-top 2s; /* Safari 和 Chrome */
