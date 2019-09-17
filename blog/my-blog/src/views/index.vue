@@ -6,7 +6,7 @@
             ZMER
         </div>
         <div id="header">
-            <div v-for="(item,index) in headerList" :key = index><span class="underline-text">{{item.title}}</span></div>
+            <div v-for="(item,index) in headerList" :key = index><span class="underline-text" @click="goHref(item.href)">{{item.title}}</span></div>
         </div>
         <div id="author" class="underline-text">
             ming.zhu @ 77
@@ -22,23 +22,23 @@ export default {
       headerList: [
         {
           title: 'Home',
-          href: 'www..baidu.com'
+          href: 'www.baidu.com'
         },
         {
           title: 'Article',
-          href: 'www..baidu.com'
+          href: 'www.baidu.com'
         },
         {
-          title: 'Tool-Box',
-          href: 'www..baidu.com'
+          title: 'QuestionBank',
+          href: '/questionbank'
         },
         {
           title: 'Blogs',
-          href: 'www..baidu.com'
+          href: 'www.baidu.com'
         },
         {
           title: 'Life',
-          href: 'www..baidu.com'
+          href: 'www.baidu.com'
         }
       ]
     }
@@ -59,6 +59,15 @@ export default {
     //   let titleDiv = document.getElementById('title')
     //   titleDiv.style.transform = `rotate(${this.titleRotate}deg)`
     // }, 10000)
+  },
+  methods: {
+    goHref (target) {
+      if (target.slice(0, 1) === '/') {
+        this.$router.push(target)
+      } else {
+        window.open(target)
+      }
+    }
   }
 }
 </script>

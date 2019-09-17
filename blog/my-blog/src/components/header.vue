@@ -1,8 +1,14 @@
 <template>
     <div id="header">
       <div>
-        <i :class="iconClass"></i>
-        {{title}}
+        <span @click="goBack">
+          <i class="el-icon-back"></i>
+          返回
+        </span>
+        <span>
+          <i :class="iconClass" id="headerTitle"></i>
+          {{title}}
+        </span>
       </div>
     </div>
 </template>
@@ -38,15 +44,41 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    goBack () {
+      window.history.go(-1)
+    }
   }
 }
 </script>
 <style lang="less" scoped>
 @import '../assets/css/palette.less';
 #header{
-  background-color: @darkPrimaryColor;
+  background-color: @primaryColor;
   height: 60px;
   line-height: 60px;
-  color: #fff;
+  color: @textPrimaryColor;
+}
+#header > div:nth-of-type(1){
+  font-size: 18px;
+  margin-left: 40px;
+  display: inline-block;
+}
+#header > div > span:nth-of-type(1){
+  cursor: pointer;
+}
+#header > div > span:nth-of-type(2){
+  margin-left: 10px;
+}
+#header > div > span:nth-of-type(2)::before{
+  content: '';
+  display: inline-block;
+  border-width: 0 1px 0 1px;
+  border-style: solid;
+  border-color: @textPrimaryColor;
+  height: 17px;
+  margin-right: 20px;
+  vertical-align: -2px;
 }
 </style>
