@@ -11,7 +11,15 @@ module.exports = {
     assetsSubDirectory: 'static',
     // 判断如果是开发环境就是'/' 如果是打包环境就是'./'
     assetsPublicPath: process.env.npm_lifecycle_event === 'dev' ? '/' : './',
-    proxyTable: {},
+    proxyTable: {
+      '/questions': {
+        target: 'http://47.94.87.211:3000/questions/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/questions': ''
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

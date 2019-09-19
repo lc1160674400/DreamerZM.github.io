@@ -12,15 +12,16 @@
           width="180">
         </el-table-column>
         <el-table-column
-          prop="name"
+          prop="author"
           label="上传作者"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="address"
+          prop="title"
           label="题目标题">
         </el-table-column>
         <el-table-column
+          prop="content"
           label="快速预览">
         </el-table-column>
       </el-table>
@@ -36,24 +37,25 @@ export default {
   },
   data () {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      tableData: []
     }
+  },
+  mounted () {
+    this.$axios.get('/questions/queryAll')
+      .then((res) => {
+        res.data.forEach(element => {
+          this.tableData.push({
+            date: element.question_update_time ? element.question_update_time : '暂无日期',
+            author: element.question_author,
+            title: element.question_title,
+            content: element.question_content
+          })
+        })
+      }, (res) => {
+        this.$store.commit('dialogShow', {title: '调用接口失败', content: res, cancelText: '关闭'})
+      }).catch((e) => {
+        console.log(e)
+      })
   }
 }
 </script>
