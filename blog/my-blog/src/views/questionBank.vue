@@ -1,7 +1,7 @@
 <template>
     <div id="questionBank">
       <headerComponente></headerComponente>
-      <sidebarComponente></sidebarComponente>
+      <sidebarComponente activeItem="中级"></sidebarComponente>
        <el-table
         :data="tableData"
         id="dataTable"

@@ -16,9 +16,11 @@ export default {
       icon: 'el-icon-setting',
       items: [
         {
-          text: '上传题目'
+          text: '上传题目',
+          href: 'updatequestion'
         }, {
-          text: '手动上传'
+          text: '手动上传',
+          href: 'updatequestionbyhand'
         }
       ]
     }

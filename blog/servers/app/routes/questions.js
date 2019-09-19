@@ -41,6 +41,30 @@ router.get('/queryAll',(req,res,next)=>{
   })
 })
 
+// 创建一个插入数据库接口
+router.post('/insert',(req,res)=>{
+  console.log(req.body);
+  // var name = req.body.name;
+  // var age = req.body.age;
+  // pool.getConnection(function (err, connection) {
+  //     connection.query(userSQL.insertUserInfo, [name,age], function (err, rows) {
+  //         if (err) {
+  //             res.end('新增失败:' + err);
+  //         } else {
+  //             res.redirect('/users');
+  //         }
+  //         connection.release();
+
+  //     });
+  // });
+  // pool.getConnection((err,connection)=>{
+  //   connection.query(questionSql.queryAll,(err,result)=>{
+  //     responseJSON(res, result)
+  //     connection.release();
+  //   })
+  // })
+})
+
 // 监听一个路由接收参数并且返回一堆静态测试数据
 router.get('/getQuestion', function(req, res, next) {
   var question = new Question();
