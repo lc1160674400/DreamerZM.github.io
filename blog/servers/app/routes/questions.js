@@ -44,19 +44,29 @@ router.get('/queryAll',(req,res,next)=>{
 // 创建一个插入数据库接口
 router.post('/insert',(req,res)=>{
   console.log(req.body);
-  // var name = req.body.name;
-  // var age = req.body.age;
-  // pool.getConnection(function (err, connection) {
-  //     connection.query(userSQL.insertUserInfo, [name,age], function (err, rows) {
-  //         if (err) {
-  //             res.end('新增失败:' + err);
-  //         } else {
-  //             res.redirect('/users');
-  //         }
-  //         connection.release();
+  let params = req.body;
+  var strTime=params.date1; //字符串日期格式             
+  var date= new Date(Date.parse(strTime.replace(/-/g,   "/"))); //转换成Data();
+  pool.getConnection(function (err, connection) {
+      connection.query(questionSql.insert, [params.title,params.content,'zmer',params.level,params.type,date], function (err, rows) {
+          if (err) {
+              res.send({
+                status:'500',
+                message:{
+                  title:'新增失败',
+                  content:err
+              }
+              });
+          } else {
+              res.send({
+                status:'200',
+                message:'上传成功'
+              });
+          }
+          connection.release();
 
-  //     });
-  // });
+      });
+  });
   // pool.getConnection((err,connection)=>{
   //   connection.query(questionSql.queryAll,(err,result)=>{
   //     responseJSON(res, result)

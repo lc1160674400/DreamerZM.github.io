@@ -26,9 +26,14 @@ const mutations = {
   },
   dialogHide (state) {
     state.showDialog = false
-    state.dialogOption.title = '调用弹窗失败'
-    state.dialogOption.content = '弹窗未初始化'
-    state.dialogOption.cancelText = '关闭'
+    setTimeout(
+      () => {
+        console.log(22222)
+        state.dialogOption.title = '调用弹窗失败'
+        state.dialogOption.content = '弹窗未初始化'
+        state.dialogOption.cancelText = '关闭'
+      }, 1000
+    )
   }
 }
 export default new Vuex.Store({

@@ -5,7 +5,8 @@ export default {
       icon: 'el-icon-odometer',
       items: [
         {
-          text: '初级'
+          text: '初级',
+          href: 'questionbank'
         }, {
           text: '中级'
         }

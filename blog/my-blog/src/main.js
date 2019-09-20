@@ -13,6 +13,23 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 Vue.prototype.$axios = axios
+Vue.prototype.transformDateToString = function (date) {
+  console.log(date, typeof date)
+  if (typeof date === 'string') {
+    return date.split('T')[0]
+  }
+  var year = date.getFullYear()
+  var month = (date.getMonth() + 1).toString()
+  var day = (date.getDate()).toString()
+  if (month.length === 1) {
+    month = '0' + month
+  }
+  if (day.length === 1) {
+    day = '0' + day
+  }
+  var dateTime = year + '-' + month + '-' + day
+  return dateTime
+}
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 

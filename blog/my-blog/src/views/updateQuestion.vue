@@ -80,11 +80,15 @@ export default {
       this.$set(this.form, 'date1', defaultDate)
     },
     onSubmit () {
-      console.log(this.form)
       this.$axios.post('/questions/insert', this.form).then(res => {
-        console.log('请求成功', res)
-      }, res => {
-        console.log('请求失败', res)
+        if (res.data.status === '200') {
+          this.$store.commit('dialogShow', {title: '提交成功', content: '', cancelText: '关闭'})
+          setTimeout(() => {
+            this.$router.go(0)
+          }, 2000)
+        } else {
+          this.$store.commit('dialogShow', {title: res.data.message.title, content: res.data.message.content, cancelText: '关闭'})
+        }
       })
     }
 

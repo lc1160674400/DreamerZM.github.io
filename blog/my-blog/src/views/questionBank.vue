@@ -45,7 +45,7 @@ export default {
       .then((res) => {
         res.data.forEach(element => {
           this.tableData.push({
-            date: element.question_update_time ? element.question_update_time : '暂无日期',
+            date: element.question_update_time ? this.transformDateToString(element.question_update_time) : '暂无日期',
             author: element.question_author,
             title: element.question_title,
             content: element.question_content
