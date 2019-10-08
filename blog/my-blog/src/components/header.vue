@@ -1,13 +1,18 @@
 <template>
     <div id="header">
       <div>
-        <span @click="goBack">
+        <span @click="goBack" v-if="!isIndex">
           <i class="el-icon-back"></i>
           返回
         </span>
+        <span v-if="isIndex" id="logo">ZMER</span>
         <span>
           <i :class="iconClass" id="headerTitle"></i>
           {{title}}
+        </span>
+        <span id="Home" v-if="!isIndex" @click=goHome>
+          <i class="el-icon-s-home" ></i>
+          Home
         </span>
       </div>
     </div>
@@ -16,6 +21,10 @@
 export default {
   name: 'headerComponente',
   props: {
+    isIndex: {
+      type: Boolean,
+      default: false
+    },
     // 自定义验证函数
     iconClass: {
       type: String,
@@ -46,6 +55,9 @@ export default {
     }
   },
   methods: {
+    goHome () {
+      this.$router.push('/')
+    },
     goBack () {
       window.history.go(-1)
     }
@@ -54,8 +66,13 @@ export default {
 </script>
 <style lang="less" scoped>
 @import '../assets/css/palette.less';
+#Home{
+  position: absolute;
+  right: 1%;
+  cursor: pointer;
+}
 #header{
-  background-color: @primaryColor;
+  background-color: @secondaryTextColorSide;
   height: 60px;
   line-height: 60px;
   color: @textPrimaryColor;
@@ -80,5 +97,9 @@ export default {
   height: 17px;
   margin-right: 20px;
   vertical-align: -2px;
+}
+#logo{
+  font-size: 33px;
+    font-weight: bolder;
 }
 </style>

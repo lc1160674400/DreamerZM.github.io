@@ -41,6 +41,40 @@ router.get('/queryAll',(req,res,next)=>{
   })
 })
 
+// 条件查询接口
+router.get('/queryQuestion',(req,res,next)=>{
+  var question = new Question();
+  var params = URL.parse(req.url, true).query;
+  let key = Object.keys(params)[0]
+  let level_translator_dict = {
+    'middle':'中级',
+    'base':'初级'
+  }
+  let value = ''
+  if(key === 'question_level'){
+    value = level_translator_dict[params[key]]
+  }else{
+    value = params[key]
+  }
+  
+  pool.getConnection((err,connection)=>{
+    connection.query(questionSql.select([key,value]),function(err,rows){
+      if(err){
+        res.send({
+          status:'500',
+          message:{
+            title:"查询失败",
+            content:err
+          }
+        })
+      } else {
+        responseJSON(res, rows)
+        connection.release();
+      }
+    })
+  })
+})
+
 // 创建一个插入数据库接口
 router.post('/insert',(req,res)=>{
   console.log(req.body);

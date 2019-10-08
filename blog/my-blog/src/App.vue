@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view/>
+    <headerComponente iconClass='el-icon-upload' :title="pageInfo.title" :isIndex="pageInfo.current === '/'"></headerComponente>
+    <sidebarComponente :activeItem='pageInfo.activeItem'></sidebarComponente>
+    <router-view @setParent = "doSetParent" id="routerView"/>
     <el-dialog
       :title="dialogOption.title"
       :visible="showDialog"
@@ -15,7 +17,13 @@
 </template>
 
 <script>
+import headerComponente from './components/header'
+import sidebarComponente from './components/sidebar'
 export default {
+  components: {
+    headerComponente,
+    sidebarComponente
+  },
   name: 'App',
   computed: {
     showDialog () {
@@ -23,19 +31,31 @@ export default {
     },
     dialogOption () {
       return this.$store.state.dialogOption
+    },
+    pageInfo () {
+      return this.$store.state.pageInfo
+    }
+  },
+  data () {
+    return {
     }
   },
   methods: {
+    doSetParent (params) {
+      console.log(params)
+    },
     dialogHide () {
       this.$store.commit('dialogHide')
     }
   },
   mounted () {
+
   }
 }
 </script>
 
 <style lang="less">
+@import './assets/css/palette.less';
 // 清除默认外边距
 html,body{
   margin: 0;
@@ -47,5 +67,13 @@ html,body{
 
   min-width: 1376px;
   position:fixed;
+}
+#routerView{
+    display: inline-block;
+    background-color: @secondaryTextColorSide2;
+    vertical-align: top;
+    margin-left: -6px;
+    width: calc(100% - 200px);
+    height: calc(100% - 60px);
 }
 </style>

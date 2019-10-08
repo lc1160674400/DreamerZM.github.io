@@ -1,13 +1,14 @@
 <template>
     <div id="sidebar">
-        <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="!isCollapse">
+        <el-menu :default-active="activeIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="!isCollapse" background-color="#757575" text-color="#fff"
+      active-text-color="#ffd04b">
             <el-submenu v-for="(item,index) in sidebarData" :key="index" :index="index+''">
                     <template slot="title">
                         <i :class="item.icon"></i>
                         <span slot="title">{{item.title}}</span>
                     </template>
                     <el-menu-item-group>
-                        <el-menu-item :index="index + '-' + childindex" v-for="(childitem,childindex) in item.items" :key="childindex" @click="goThere(childitem.href)">{{childitem.text}}</el-menu-item>
+                        <el-menu-item :index="index + '-' + childindex" v-for="(childitem,childindex) in item.items" :key="childindex" @click="goThere(childitem)">{{childitem.text}}</el-menu-item>
                     </el-menu-item-group>
             </el-submenu>
         </el-menu>
@@ -22,6 +23,8 @@ export default {
     activeItem: {
       type: String,
       validator: function (t) {
+        // 第一次进入或者刷新页面的时候有可能是空，校验的时候也可以通过比较好
+        if (t === '') { return true }
         let legal = false
         config.questionBankSideBarList.forEach(element => {
           element.items.forEach(ele => {
@@ -62,15 +65,19 @@ export default {
   },
   methods: {
     handleOpen (key, keyPath) {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     },
     handleClose (key, keyPath) {
-      console.log(key, keyPath)
+      // console.log(key, keyPath)
     },
-    goThere (target) {
-      console.log('跳转~')
-      if (target) {
-        this.$router.push(target)
+    goThere (options) {
+      // console.log('跳转~')
+      if (options.href) {
+        if (options.params) {
+          this.$router.push({path: options.href, query: options.params})
+        } else {
+          this.$router.push(options.href)
+        }
       }
     }
   },
@@ -96,7 +103,6 @@ export default {
 @import '../assets/css/palette.less';
 #sidebar{
     height: 100%;
-    width: 15%;
     display: inline-block;
 }
 
@@ -105,8 +111,7 @@ export default {
     height: 100%;
 }
 #sidebar ul{
-    height: 100% !important;
-    position: absolute;
+    height: calc(100% - 60px);
 }
 .change-btn{
     position: absolute;

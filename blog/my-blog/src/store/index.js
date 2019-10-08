@@ -10,6 +10,11 @@ let state = {
     title: '调用弹窗失败',
     content: '弹窗未初始化',
     cancelText: '关闭'
+  },
+  pageInfo: {
+    title: '',
+    activeItem: '',
+    current: ''
   }
 }
 
@@ -28,15 +33,28 @@ const mutations = {
     state.showDialog = false
     setTimeout(
       () => {
-        console.log(22222)
         state.dialogOption.title = '调用弹窗失败'
         state.dialogOption.content = '弹窗未初始化'
         state.dialogOption.cancelText = '关闭'
       }, 1000
     )
+  },
+  PageInfo (state, options) {
+    state.pageInfo.title = options.title ? options.title : ''
+    state.pageInfo.activeItem = options.activeItem ? options.activeItem : ''
+    state.pageInfo.current = options.current ? options.current : ''
+  }
+}
+
+const actions = {
+  setPageInfo (context, options) {
+    setTimeout(() => {
+      context.commit('PageInfo', options)
+    })
   }
 }
 export default new Vuex.Store({
   state,
-  mutations
+  mutations,
+  actions
 })

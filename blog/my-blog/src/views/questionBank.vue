@@ -1,7 +1,5 @@
 <template>
     <div id="questionBank">
-      <headerComponente></headerComponente>
-      <sidebarComponente activeItem="中级"></sidebarComponente>
        <el-table
         :data="tableData"
         id="dataTable"
@@ -37,25 +35,50 @@ export default {
   },
   data () {
     return {
-      tableData: []
+      tableData: [],
+      level: ''
     }
   },
   mounted () {
-    this.$axios.get('/questions/queryAll')
-      .then((res) => {
-        res.data.forEach(element => {
-          this.tableData.push({
-            date: element.question_update_time ? this.transformDateToString(element.question_update_time) : '暂无日期',
-            author: element.question_author,
-            title: element.question_title,
-            content: element.question_content
-          })
+    let level = this.$route.query.level ? this.$route.query.level : ''
+    this.level = level
+    if (this.level) {
+      this.$axios.get('/questions/queryQuestion', {params: {
+        question_level: this.level
+      }}).then(this.handleQuestionData, this.handleError)
+    } else {
+      this.$axios.get('/questions/queryAll')
+        .then(this.handleQuestionData, this.handleError)
+    }
+  },
+  methods: {
+    handleQuestionData (res) {
+      this.tableData = []
+      res.data.forEach(element => {
+        this.tableData.push({
+          date: element.question_update_time ? this.transformDateToString(element.question_update_time) : '暂无日期',
+          author: element.question_author,
+          title: element.question_title,
+          content: element.question_content
         })
-      }, (res) => {
-        this.$store.commit('dialogShow', {title: '调用接口失败', content: res, cancelText: '关闭'})
-      }).catch((e) => {
-        console.log(e)
       })
+    },
+    handleError (res) {
+      this.$store.commit('dialogShow', {title: '调用接口失败', content: res, cancelText: '关闭'})
+    }
+  },
+  computed: {
+    levelKeeper () {
+      return this.$route.query.level
+    }
+  },
+  watch: {
+    levelKeeper (val) {
+      // 当同一个页面level发生改变的时候
+      this.$axios.get('/questions/queryQuestion', {params: {
+        question_level: val
+      }}).then(this.handleQuestionData, this.handleError)
+    }
   }
 }
 </script>
@@ -82,8 +105,6 @@ export default {
   font-size: 17px;
 }
 #dataTable{
-  width: 84%;
-  display: inline-block;
-  position: absolute;
+  width: 100%;
 }
 </style>

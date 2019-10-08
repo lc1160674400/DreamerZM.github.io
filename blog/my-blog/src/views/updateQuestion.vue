@@ -1,49 +1,51 @@
 <template>
     <div>
-        <headerComponente iconClass='el-icon-upload' title='上传题目'></headerComponente>
-        <sidebarComponente activeItem='上传题目'></sidebarComponente>
-        <el-form ref="form" :model="form" label-width="80px" id="questionForm">
-        <el-form-item label="题目标题">
-            <el-input v-model="form.title"></el-input>
-        </el-form-item>
-        <el-form-item label="题目难度">
-            <el-select v-model="form.level" placeholder="请选择题目难度">
-            <el-option label="初级" value="初级"></el-option>
-            <el-option label="中级" value="中级"></el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item label="题目答案">
-            <el-input type="textarea" v-model="form.content"></el-input>
-        </el-form-item>
-        <el-form-item label="标签">
-            <el-checkbox-group v-model="form.tags">
-            <el-checkbox label="面试必出" name="type"></el-checkbox>
-            <el-checkbox label="基础题" name="type"></el-checkbox>
-            <el-checkbox label="刨根问底" name="type"></el-checkbox>
-            <el-checkbox label="额外知识" name="type"></el-checkbox>
-            </el-checkbox-group>
-        </el-form-item>
-        <el-form-item label="题目类型">
-            <el-radio-group v-model="form.type">
-            <el-radio label="JavaScript"></el-radio>
-            <el-radio label="html && css"></el-radio>
-            <el-radio label="Vue"></el-radio>
-            <el-radio label="React"></el-radio>
-            <el-radio label="Angular"></el-radio>
-            </el-radio-group>
-        </el-form-item>
-        <el-form-item label="当前时间">
-            <el-col :span="11">
-                <!-- <div>{{form.date1}}</div> -->
+      <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tab-pane label="概念题目" name="first" id="questionForm">
+          <el-form ref="form" :model="form" label-width="80px" >
+            <el-form-item label="题目标题">
+                <el-input v-model="form.title"></el-input>
+            </el-form-item>
+            <el-form-item label="题目难度">
+                <el-select v-model="form.level" placeholder="请选择题目难度">
+                <el-option label="初级" value="初级"></el-option>
+                <el-option label="中级" value="中级"></el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="题目答案">
+                <el-input type="textarea" v-model="form.content"></el-input>
+            </el-form-item>
+            <el-form-item label="标签">
+                <el-checkbox-group v-model="form.tags">
+                <el-checkbox label="面试必出" name="type"></el-checkbox>
+                <el-checkbox label="基础题" name="type"></el-checkbox>
+                <el-checkbox label="刨根问底" name="type"></el-checkbox>
+                <el-checkbox label="额外知识" name="type"></el-checkbox>
+                </el-checkbox-group>
+            </el-form-item>
+            <el-form-item label="题目类型">
+                <el-radio-group v-model="form.type">
+                <el-radio label="JavaScript"></el-radio>
+                <el-radio label="html && css"></el-radio>
+                <el-radio label="Vue"></el-radio>
+                <el-radio label="React"></el-radio>
+                <el-radio label="Angular"></el-radio>
+                </el-radio-group>
+            </el-form-item>
+            <el-form-item label="当前时间">
+                <el-col :span="11">
 
-            <el-date-picker type="date" placeholder="默认选择当前日期" v-model="form.date1" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
-            </el-col>
-        </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="onSubmit">上传题目</el-button>
-            <el-button>取消</el-button>
-        </el-form-item>
-        </el-form>
+                <el-date-picker type="date" placeholder="默认选择当前日期" v-model="form.date1" value-format="yyyy-MM-dd" style="width: 100%;"></el-date-picker>
+                </el-col>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" @click="onSubmit">上传题目</el-button>
+                <el-button>取消</el-button>
+            </el-form-item>
+            </el-form>
+        </el-tab-pane>
+        <el-tab-pane label="疑难笔记" name="second">配置管理</el-tab-pane>
+      </el-tabs> -->
     </div>
 </template>
 <script>
@@ -99,10 +101,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-#questionForm{
-    display: inline-block;
-    position: absolute;
-    margin-top: 23px;
-}
+// #questionForm{
+//     display: inline-block;
+//     position: absolute;
+//     margin-top: 23px;
+// }
 
 </style>
