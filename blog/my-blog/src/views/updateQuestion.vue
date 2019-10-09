@@ -1,7 +1,5 @@
 <template>
     <div>
-      <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="概念题目" name="first" id="questionForm">
           <el-form ref="form" :model="form" label-width="80px" >
             <el-form-item label="题目标题">
                 <el-input v-model="form.title"></el-input>
@@ -43,9 +41,6 @@
                 <el-button>取消</el-button>
             </el-form-item>
             </el-form>
-        </el-tab-pane>
-        <el-tab-pane label="疑难笔记" name="second">配置管理</el-tab-pane>
-      </el-tabs> -->
     </div>
 </template>
 <script>

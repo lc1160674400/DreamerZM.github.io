@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/views/index'
 import QuestionBank from '@/views/questionBank'
 import updateQuestion from '@/views/updateQuestion'
+import uploadMarkDown from '@/views/uploadMarkDown'
 import store from '@/store/index'
 Vue.use(Router)
 
@@ -41,6 +42,15 @@ const router = new Router({
       meta: {
         title: '上传题目',
         activeItem: '上传题目'
+      }
+    },
+    {
+      path: '/uploadMarkDown',
+      name: 'uploadMarkDown',
+      component: uploadMarkDown,
+      meta: {
+        title: '上传随笔',
+        activeItem: '上传随笔'
       }
     }
   ]

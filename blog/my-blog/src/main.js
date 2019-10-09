@@ -8,10 +8,12 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import axios from 'axios'
 import store from './store/index.js'
-
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
+Vue.use(mavonEditor)
 Vue.prototype.$axios = axios
 Vue.prototype.baseURL = process.env.API_ROOT
 Vue.prototype.transformDateToString = function (date) {

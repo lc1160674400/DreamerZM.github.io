@@ -21,8 +21,8 @@ export default {
           text: '上传题目',
           href: 'updatequestion'
         }, {
-          text: '手动上传',
-          href: 'updatequestionbyhand'
+          text: '上传随笔',
+          href: 'uploadMarkDown'
         }
       ]
     },
