@@ -13,6 +13,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 Vue.prototype.$axios = axios
+Vue.prototype.baseURL = process.env.API_ROOT
 Vue.prototype.transformDateToString = function (date) {
   console.log(date, typeof date)
   if (typeof date === 'string') {

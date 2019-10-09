@@ -43,11 +43,11 @@ export default {
     let level = this.$route.query.level ? this.$route.query.level : ''
     this.level = level
     if (this.level) {
-      this.$axios.get('/questions/queryQuestion', {params: {
+      this.$axios.get(`${this.baseURL}/questions/queryQuestion`, {params: {
         question_level: this.level
       }}).then(this.handleQuestionData, this.handleError)
     } else {
-      this.$axios.get('/questions/queryAll')
+      this.$axios.get(`${this.baseURL}/questions/queryAll`)
         .then(this.handleQuestionData, this.handleError)
     }
   },
@@ -75,7 +75,7 @@ export default {
   watch: {
     levelKeeper (val) {
       // 当同一个页面level发生改变的时候
-      this.$axios.get('/questions/queryQuestion', {params: {
+      this.$axios.get(`${this.baseURL}/questions/queryQuestion`, {params: {
         question_level: val
       }}).then(this.handleQuestionData, this.handleError)
     }
