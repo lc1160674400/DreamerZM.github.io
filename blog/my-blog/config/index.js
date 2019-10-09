@@ -14,7 +14,7 @@ module.exports = {
     // proxyTable:{},
     proxyTable: {
       '/questions': {
-        target: 'http://localhost:3000/questions/', // 'http://47.94.87.211:3000/questions/'
+        target: 'http://localhost:3000/questions/', // 'http://47.94.87.211:3000/questions/' //http://localhost:3000/questions/
         changeOrigin: true,
         pathRewrite: {
           '^/questions': ''
