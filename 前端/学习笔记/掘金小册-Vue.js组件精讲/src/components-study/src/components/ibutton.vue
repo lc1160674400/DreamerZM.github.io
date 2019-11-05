@@ -1,9 +1,8 @@
 <template>
     <button :class="'i-button-size-'+ size" :disabled = "disable" @click="handlerClick">
-        <div class="type1">
-            <slot name="type1"></slot>
-        </div>
-        <slot name="type2"></slot>
+        <slot name="slot1"></slot>
+        <slot name="slot2" :style="{color:'yellow'}" @click="handlerClick"></slot>
+        <slot></slot>
     </button>
 </template>
 <script>
@@ -35,9 +34,7 @@ export default{
   },
   methods: {
     handlerClick (e) {
-      console.log(1)
-      this.$emit('click1', e)
-      console.log(1)
+      this.$emit('on-click', e)
     }
   }
 }
@@ -52,7 +49,7 @@ export default{
     .i-button-size-default{
         width: 30px;
     }
-    .type1 span{
+    .type1{
         color: red;
     }
 </style>

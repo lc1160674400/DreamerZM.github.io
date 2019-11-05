@@ -1,11 +1,9 @@
 <template>
   <div class="hello">
-    <i-button>按钮 1</i-button>
+    <i-button @click.native="clicked">按钮 1</i-button>
     <i-button>
-      <strong>按钮 2</strong>
+      <strong slot="slot2">按钮 2</strong>
     </i-button>
-    <i-button><span slot="type1" @click1="handler1">这是红色</span></i-button>
-    <i-button><span slot="type2">这是bai色</span></i-button>
   </div>
 </template>
 
@@ -20,9 +18,8 @@ export default {
     }
   },
   methods: {
-    handler1 () {
-      console.log(2)
-      alert(1)
+    clicked (e) {
+      console.log('this button has been clicked', e)
     }
   }
 }
