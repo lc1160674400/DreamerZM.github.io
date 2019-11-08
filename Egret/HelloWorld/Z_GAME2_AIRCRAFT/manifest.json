@@ -8,10 +8,16 @@
 		"libs/modules/promise/promise.js"
 	],
 	"game": [
+		"bin-debug/config/gameconfig.js",
 		"bin-debug/LoadingUI.js",
-		"bin-debug/Main.js",
 		"bin-debug/Platform.js",
+		"bin-debug/bullet/bullet.js",
+		"bin-debug/bullet/bulletCount.js",
+		"bin-debug/bullet/identityType.js",
+		"bin-debug/Main.js",
 		"bin-debug/controller/Rocker.js",
+		"bin-debug/enemy/enemy.js",
+		"bin-debug/enemy/enemyInterface.js",
 		"bin-debug/view/Hero.js",
 		"bin-debug/view/ViewManager.js"
 	]

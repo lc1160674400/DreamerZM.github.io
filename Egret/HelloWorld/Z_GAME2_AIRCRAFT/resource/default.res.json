@@ -1,12 +1,8 @@
 {
 	"groups": [
 		{
-			"keys": "aircraft_json",
+			"keys": "aircraft_json,tes_json,tes_png,boom_json,boom_png,c_back_png,c_front_png,bullet_png,hero2_png,hero1_png,enemy_2_png,enemy_1_png,enemy_boom_png,enemy_boom_json",
 			"name": "aircraft"
-		},
-		{
-			"name": "preload",
-			"keys": "c_back_png,c_front_png"
 		}
 	],
 	"resources": [
@@ -32,14 +28,69 @@
 			"subkeys": "bg1,bg2,bg3,hero,start"
 		},
 		{
-			"name": "c_back_png",
+			"url": "assets/c_back.png",
 			"type": "image",
-			"url": "assets/c_back.png"
+			"name": "c_back_png"
 		},
 		{
-			"name": "c_front_png",
+			"url": "assets/c_front.png",
 			"type": "image",
-			"url": "assets/c_front.png"
+			"name": "c_front_png"
+		},
+		{
+			"url": "assets/bullet.png",
+			"type": "image",
+			"name": "bullet_png"
+		},
+		{
+			"url": "assets/hero2.png",
+			"type": "image",
+			"name": "hero2_png"
+		},
+		{
+			"url": "assets/hero1.png",
+			"type": "image",
+			"name": "hero1_png"
+		},
+		{
+			"url": "assets/tes.json",
+			"type": "json",
+			"name": "tes_json"
+		},
+		{
+			"url": "assets/tes.png",
+			"type": "image",
+			"name": "tes_png"
+		},
+		{
+			"url": "assets/boom.json",
+			"type": "json",
+			"name": "boom_json"
+		},
+		{
+			"url": "assets/boom.png",
+			"type": "image",
+			"name": "boom_png"
+		},
+		{
+			"url": "assets/enemy_2.png",
+			"type": "image",
+			"name": "enemy_2_png"
+		},
+		{
+			"url": "assets/enemy_1.png",
+			"type": "image",
+			"name": "enemy_1_png"
+		},
+		{
+			"url": "assets/enemy_boom.png",
+			"type": "image",
+			"name": "enemy_boom_png"
+		},
+		{
+			"url": "assets/enemy_boom.json",
+			"type": "json",
+			"name": "enemy_boom_json"
 		}
 	]
 }

@@ -1,0 +1,80 @@
+{
+	"groups": [
+		{
+			"keys": "aircraft_json,tes_json,tes_png,boom_json,boom_png",
+			"name": "aircraft"
+		},
+		{
+			"keys": "c_back_png,c_front_png,bullet_png,hero2_png,hero1_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/bg.jpg",
+			"type": "image",
+			"name": "bg_jpg"
+		},
+		{
+			"url": "assets/egret_icon.png",
+			"type": "image",
+			"name": "egret_icon_png"
+		},
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/aircraft.json",
+			"type": "sheet",
+			"name": "aircraft_json",
+			"subkeys": "bg1,bg2,bg3,hero,start"
+		},
+		{
+			"url": "assets/c_back.png",
+			"type": "image",
+			"name": "c_back_png"
+		},
+		{
+			"url": "assets/c_front.png",
+			"type": "image",
+			"name": "c_front_png"
+		},
+		{
+			"url": "assets/bullet.png",
+			"type": "image",
+			"name": "bullet_png"
+		},
+		{
+			"url": "assets/hero2.png",
+			"type": "image",
+			"name": "hero2_png"
+		},
+		{
+			"url": "assets/hero1.png",
+			"type": "image",
+			"name": "hero1_png"
+		},
+		{
+			"url": "assets/tes.json",
+			"type": "json",
+			"name": "tes_json"
+		},
+		{
+			"url": "assets/tes.png",
+			"type": "image",
+			"name": "tes_png"
+		},
+		{
+			"url": "assets/boom.json",
+			"type": "json",
+			"name": "boom_json"
+		},
+		{
+			"url": "assets/boom.png",
+			"type": "image",
+			"name": "boom_png"
+		}
+	]
+}

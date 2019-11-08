@@ -1,0 +1,28 @@
+{"mc":{
+	"aircraft":{
+		"frameRate":24,
+		"labels":[
+			{"name":"fly","frame":1,"end":2}
+			
+			],
+		"events":[
+			
+			],
+		"frames":[
+			
+			{
+			"res":"1AA171FC",
+			"x":0,
+			"y":0
+			},
+			{
+			"res":"B1B2F08A",
+			"x":0,
+			"y":0
+			}
+			]
+}},
+	"res":{
+		"1AA171FC":{"x":1,"y":1,"w":66,"h":80},
+		"B1B2F08A":{"x":1,"y":83,"w":66,"h":80}
+	}}

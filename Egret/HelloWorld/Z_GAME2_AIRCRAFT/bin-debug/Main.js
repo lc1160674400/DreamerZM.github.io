@@ -75,6 +75,9 @@ var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
         var _this = _super.call(this) || this;
+        _this.speedX = 0; //人物移动速度
+        _this.speedY = 0;
+        _this.speed = 10;
         _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
         return _this;
     }
@@ -104,9 +107,6 @@ var Main = (function (_super) {
                         return [4 /*yield*/, RES.loadGroup("aircraft", 0, loadingView)];
                     case 2:
                         _a.sent();
-                        return [4 /*yield*/, RES.loadGroup("preload", 0, loadingView)];
-                    case 3:
-                        _a.sent();
                         this.stage.removeChild(loadingView);
                         return [2 /*return*/];
                 }
@@ -116,10 +116,66 @@ var Main = (function (_super) {
     Main.prototype.onGroupComplete = function () {
         this._viewManager = new ViewManager(this, RES.getRes('aircraft_json'));
         this._hero = new Hero(this, RES.getRes('aircraft_json'));
-        var imgLoader = new egret.ImageLoader();
-        var frontBitMap = new egret.Bitmap(RES.getRes('c_back_png'));
-        var backBitMap = new egret.Bitmap(RES.getRes('c_front_png'));
+        var frontBitMap = new egret.Bitmap(RES.getRes('c_front_png'));
+        var backBitMap = new egret.Bitmap(RES.getRes('c_back_png'));
         this._rocker = new Rocker(this, frontBitMap, backBitMap);
+        this._rocker.addEventListener("vj_start", this.onStart, this);
+        this._rocker.addEventListener("vj_move", this.onChange, this);
+        this._rocker.addEventListener("vj_end", this.onEnd, this);
+        // 生成敌人
+        this.generateEnemy();
+    };
+    Main.prototype.onStart = function () {
+        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
+    };
+    Main.prototype.onChange = function (e) {
+        var angle = e.data;
+        this.speedX = Math.cos(angle) * this.speed;
+        this.speedY = Math.sin(angle) * this.speed;
+    };
+    Main.prototype.onEnd = function () {
+        this.removeEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
+    };
+    Main.prototype.onEnterFrame = function () {
+        this._hero.hero.x += this.speedX;
+        this._hero.hero.y += this.speedY;
+        this._hero.hero.x = this._hero.hero.x < 0 ? 0 : this._hero.hero.x;
+        this._hero.hero.y = this._hero.hero.y < 0 ? 0 : this._hero.hero.y;
+        this._hero.hero.x = this._hero.hero.x > this.stage.stageWidth - 50 ? this.stage.stageWidth - 50 : this._hero.hero.x;
+        this._hero.hero.y = this._hero.hero.y > this.stage.stageHeight - 50 ? this.stage.stageHeight - 50 : this._hero.hero.y;
+    };
+    Main.prototype.generateEnemy = function () {
+        var enemyConfig = {};
+        var enemyBoomConfig1 = {
+            bitmapData: RES.getRes('enemy_1_png'),
+            boomName: 'enemy_boom',
+            boomAction: 'boom',
+            boomData: RES.getRes('enemy_boom_json'),
+            boomTemp: RES.getRes('enemy_boom_png'),
+            // flyName:'enemy_boom',
+            // flyAction:'boom',
+            // flyData:RES.getRes('enemy_boom_json'),
+            // flyTemp:RES.getRes('enemy_boom_png'),
+            loopTimes: 5,
+            blood: 2,
+            beginLocation: [100, 100],
+        };
+        var enemyBoomConfig2 = {
+            bitmapData: RES.getRes('enemy_2_png'),
+            boomName: 'enemy_boom',
+            boomAction: 'boom',
+            boomData: RES.getRes('enemy_boom_json'),
+            boomTemp: RES.getRes('enemy_boom_png'),
+            // flyName:'enemy_boom',
+            // flyAction:'boom',
+            // flyData:RES.getRes('enemy_boom_json'),
+            // flyTemp:RES.getRes('enemy_boom_png'),
+            loopTimes: 5,
+            blood: 2,
+            beginLocation: [500, 100],
+        };
+        var enemy = new Enemy(this, enemyBoomConfig1);
+        var enemy = new Enemy(this, enemyBoomConfig2);
     };
     return Main;
 }(egret.DisplayObjectContainer));

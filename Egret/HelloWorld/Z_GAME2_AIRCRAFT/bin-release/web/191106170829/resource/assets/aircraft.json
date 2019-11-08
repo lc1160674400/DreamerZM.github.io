@@ -1,0 +1,6 @@
+{"file":"aircraft.png","frames":{
+"bg2":{"x":523,"y":1,"w":520,"h":854,"offX":0,"offY":0,"sourceW":520,"sourceH":854},
+"bg3":{"x":1,"y":1,"w":520,"h":1498,"offX":0,"offY":0,"sourceW":520,"sourceH":1498},
+"hero":{"x":1567,"y":1,"w":99,"h":123,"offX":1,"offY":1,"sourceW":100,"sourceH":124},
+"start":{"x":1668,"y":1,"w":148,"h":58,"offX":9,"offY":5,"sourceW":161,"sourceH":67},
+"bg1":{"x":1045,"y":1,"w":520,"h":851,"offX":0,"offY":0,"sourceW":520,"sourceH":851}}}

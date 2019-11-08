@@ -41,7 +41,7 @@ def get_df(fileName,sheet_name = 'Sales'):
     df3 = df2.groupby(by='所属部门').agg({'1季度销售额':sum}).reset_index()
     return [df1,df2,df3]
 
-def generate_excel(df_list, excel_name='./Report.xlsx', sheet_list=['Sales','Report1','Report2']):
+def generate_excel(df_list, excel_name='./RESULT.xlsx', sheet_list=['Sales','Report1','Report2']):
     """
     生成excel
     :param sheet_name:
