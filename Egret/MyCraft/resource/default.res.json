@@ -1,0 +1,65 @@
+{
+	"groups": [
+		{
+			"keys": "background1_jpg,cloud_png,c_front_png,c_back_png,hero_json,hero_png,bullet_png,enemy_1_png,boom2_png,boom2_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/background1.jpg",
+			"type": "image",
+			"name": "background1_jpg"
+		},
+		{
+			"url": "assets/cloud.png",
+			"type": "image",
+			"name": "cloud_png"
+		},
+		{
+			"url": "assets/c_front.png",
+			"type": "image",
+			"name": "c_front_png"
+		},
+		{
+			"url": "assets/c_back.png",
+			"type": "image",
+			"name": "c_back_png"
+		},
+		{
+			"url": "assets/hero.json",
+			"type": "json",
+			"name": "hero_json"
+		},
+		{
+			"url": "assets/hero.png",
+			"type": "image",
+			"name": "hero_png"
+		},
+		{
+			"url": "assets/bullet.png",
+			"type": "image",
+			"name": "bullet_png"
+		},
+		{
+			"url": "assets/enemy_1.png",
+			"type": "image",
+			"name": "enemy_1_png"
+		},
+		{
+			"name": "boom2_png",
+			"type": "image",
+			"url": "assets/boom2.png"
+		},
+		{
+			"name": "boom2_json",
+			"type": "json",
+			"url": "assets/boom2.json"
+		}
+	]
+}
